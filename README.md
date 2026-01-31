@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Marie-Danielle
 
-## Getting Started
+Un portfolio professionnel moderne et administrable, construit avec **Next.js 15**, **Tailwind CSS**, et **Framer Motion**.
+Il inclut un **Tableau de Bord Administrateur** pour gérer dynamiquement tout le contenu du site (projets, compétences, expériences, profil).
 
-First, run the development server:
+## 🚀 Fonctionnalités Clés
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+*   **Frontend Moderne** : Animations fluides (Framer Motion), design responsive, mode sombre/clair.
+*   **Contenu Dynamique** : Tout est modifiable sans toucher au code (titres, textes, images).
+*   **Backoffice Complet** (`/admin`) :
+    *   Gestion du Profil (Nom, Bio, Photo, CV, Réseaux sociaux).
+    *   Gestion des Projets, Compétences, et Expériences.
+    *   Configuration des emails de contact.
+*   **Formulaire de Contact** : Envoi d'emails réels via **Resend**.
+*   **Gestion des Images** : Upload et optimisation via **ImageKit**.
+*   **Base de Données** : Firebase Realtime Database pour un stockage rapide et temps-réel.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Prérequis techniques
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+*   [Node.js](https://nodejs.org/) (v18 ou supérieur recommandé)
+*   [npm](https://www.npmjs.com/)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📦 Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  **Cloner le projet** :
+    ```bash
+    git clone https://github.com/votre-utilisateur/portfolio-marie-danielle.git
+    cd portfolio
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2.  **Installer les dépendances** :
+    ```bash
+    npm install
+    ```
 
-## Deploy on Vercel
+3.  **Configurer les variables d'environnement** :
+    *   Dupliquez le fichier `.env.example` et renommez-le en `.env`.
+    *   Remplissez les clés API nécessaires (voir section [Configuration détaillée](#-configuration-détaillee)).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```bash
+    cp .env.example .env
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4.  **Lancer le serveur de développement** :
+    ```bash
+    npm run dev
+    ```
+    Le site sera accessible sur [http://localhost:3000](http://localhost:3000).
+
+---
+
+## 🔑 Configuration Détaillée
+
+Pour que le site fonctionne à 100%, vous avez besoin de configurer 3 services gratuits :
+
+### 1. Firebase (Base de Données)
+Utilisé pour stocker les textes et données.
+*   Créez un projet sur [Firebase Console](https://console.firebase.google.com/).
+*   Activez **Realtime Database**.
+*   Allez dans **Project Settings > Service accounts**.
+*   Générez une nouvelle clé privée (fichier JSON).
+*   Copiez les valeurs dans votre `.env` :
+    *   `FIREBASE_PROJECT_ID`
+    *   `FIREBASE_CLIENT_EMAIL`
+    *   `FIREBASE_PRIVATE_KEY` (gardez bien les sauts de ligne `\n` ou mettez la clé entre guillemets doubles si nécessaire).
+    *   `FIREBASE_DATABASE_URL`
+
+### 2. ImageKit (Hébergement d'images)
+Utilisé pour uploader les photos de projets et de profil.
+*   Créez un compte sur [ImageKit.io](https://imagekit.io/).
+*   Allez dans **Developer options**.
+*   Copiez les clés dans `.env` :
+    *   `NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY`
+    *   `IMAGEKIT_PRIVATE_KEY`
+    *   `NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT`
+
+### 3. Resend (Emails)
+Utilisé pour recevoir les messages du formulaire de contact.
+*   Créez un compte sur [Resend.com](https://resend.com/).
+*   Créez une API Key.
+*   Ajoutez-la dans `.env` : `RESEND_API_KEY`.
+*   ⚠️ **Important (Plan Gratuit)** : Vous ne pouvez envoyer des emails **vers** l'adresse email utilisée lors de votre inscription. Assurez-vous que l'email configuré dans l'Admin correspond à votre compte Resend.
+
+### 4. Authentification Admin
+Pour sécuriser l'accès à `/admin`, définissez ces variables dans `.env` :
+*   `ADMIN_EMAIL` (ex: `admin@portfolio.com`)
+*   `ADMIN_PASSWORD` (ex: `password123`)
+
+---
+
+## 🛡️ Accès Admin
+
+L'interface d'administration n'est pas publique.
+Accédez-y via : **[http://localhost:3000/admin](http://localhost:3000/admin)**
+
+*(Note : Actuellement, l'authentification est simplifiée (NextAuth) ou ouverte en dev. Assurez-vous de sécuriser cette route avant un déploiement public).*
+
+### Fonctionnalités Admin :
+*   **Dashboard** : Vue d'ensemble.
+*   **Projets / Compétences / Expériences** : Ajouter, modifier, supprimer.
+*   **Paramètres** :
+    *   Modifier le **Titre** et **Sous-titre** de la page d'accueil.
+    *   Changer la **Photo de Profil**.
+    *   Mettre à jour le **CV** (PDF).
+    *   Configurer l'**Email de réception** des messages.
+
+---
+
+## ⚠️ Dépannage Courant
+
+**Erreur "Invalid image" ou images manquantes :**
+Le serveur utilise `next/image` qui est strict. Si une image manque dans le dossier `public/` ou si l'URL externe n'est pas autorisée dans `next.config.ts`, l'image ne s'affichera pas.
+*   Solution : Uploadez une nouvelle image via l'admin pour écraser les liens cassés.
+*   Un système de "fallback" (image par défaut) est en place pour éviter les crashs visuels.
+
+**Erreur "Resend: You can only send testing emails to your own email address" :**
+*   Vous utilisez le plan gratuit de Resend.
+*   Allez dans **Admin > Paramètres** et mettez votre email Resend dans le champ "Email de contact".
+
+**Erreur "Body exceeded 1 MB limit" :**
+*   L'upload de fichiers a été configuré pour accepter jusqu'à **5Mo**. Si vous avez cette erreur, redémarrez le serveur (`npm run dev`).
+
+---
+
+## 🚀 Déploiement
+
+La méthode recommandée est **Vercel** :
+1.  Poussez ce code sur GitHub.
+2.  Importez le projet dans Vercel.
+3.  Ajoutez toutes les variables d'environnement (`.env`) dans les paramètres du projet Vercel.
+4.  Déployez !

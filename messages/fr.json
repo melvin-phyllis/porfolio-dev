@@ -1,0 +1,141 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "skills": "Compétences",
+    "experience": "Expérience",
+    "projects": "Projets",
+    "services": "Services",
+    "testimonials": "Témoignages",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Bonjour, je suis",
+    "name": "Marie Danielle Akpeuby",
+    "title": "Développeuse Fullstack & DevOps",
+    "subtitle": "Je crée des applications web modernes et performantes avec les dernières technologies",
+    "cta": {
+      "projects": "Voir mes projets",
+      "contact": "Me contacter"
+    },
+    "roles": ["Développeuse Fullstack", "Experte DevOps", "Passionnée d'IA"]
+  },
+  "about": {
+    "title": "À propos de moi",
+    "description": "Développeuse Fullstack & DevOps passionnée par la création d'applications web innovantes. Je combine expertise technique en React, Next.js, Node.js et une forte expérience en DevOps avec Docker, Kubernetes et CI/CD.",
+    "downloadCv": "Télécharger mon CV",
+    "stats": {
+      "experience": "Années d'expérience",
+      "projects": "Projets réalisés",
+      "clients": "Clients satisfaits",
+      "technologies": "Technologies maîtrisées"
+    }
+  },
+  "skills": {
+    "title": "Compétences",
+    "subtitle": "Technologies et outils que je maîtrise",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "devops": "DevOps & Infrastructure",
+      "ai": "IA & Automatisation",
+      "database": "Bases de données"
+    }
+  },
+  "experience": {
+    "title": "Expérience & Formation",
+    "subtitle": "Mon parcours professionnel et académique"
+  },
+  "projects": {
+    "title": "Mes Projets",
+    "subtitle": "Découvrez mes réalisations récentes",
+    "viewProject": "Voir le projet",
+    "viewCode": "Voir le code",
+    "all": "Tous",
+    "filters": {
+      "all": "Tous",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "fullstack": "Fullstack",
+      "devops": "DevOps"
+    }
+  },
+  "services": {
+    "title": "Mes Services",
+    "subtitle": "Comment je peux vous aider",
+    "items": {
+      "web": {
+        "title": "Développement Web",
+        "description": "Applications web modernes et performantes avec React, Next.js, Node.js"
+      },
+      "api": {
+        "title": "API & Backend",
+        "description": "APIs REST robustes avec Node.js, Express, Django, FastAPI"
+      },
+      "devops": {
+        "title": "DevOps & Cloud",
+        "description": "CI/CD, Docker, Kubernetes, déploiement et monitoring"
+      },
+      "ai": {
+        "title": "Intégration IA",
+        "description": "Agents conversationnels, RAG, automatisation avec CrewAI"
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Témoignages",
+    "subtitle": "Ce que disent mes clients"
+  },
+  "faq": {
+    "title": "Questions Fréquentes",
+    "subtitle": "Tout ce que vous devez savoir",
+    "items": [
+      {
+        "question": "Quels types de projets réalisez-vous ?",
+        "answer": "Je réalise des applications web fullstack, des APIs, des sites vitrines, des dashboards et des solutions DevOps complètes."
+      },
+      {
+        "question": "Quels sont vos délais de réalisation ?",
+        "answer": "Les délais varient selon la complexité du projet. Un site vitrine prend généralement 2-4 semaines, une application web complexe 2-3 mois."
+      },
+      {
+        "question": "Proposez-vous de la maintenance ?",
+        "answer": "Oui, je propose des contrats de maintenance pour assurer le bon fonctionnement et la mise à jour de vos applications."
+      },
+      {
+        "question": "Comment se déroule un projet ?",
+        "answer": "Chaque projet débute par une phase de découverte, suivie de la conception, du développement, des tests et du déploiement."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contactez-moi",
+    "subtitle": "Discutons de votre projet",
+    "form": {
+      "name": "Votre nom",
+      "email": "Votre email",
+      "subject": "Sujet",
+      "message": "Votre message",
+      "send": "Envoyer",
+      "sending": "Envoi en cours...",
+      "success": "Message envoyé avec succès !",
+      "error": "Erreur lors de l'envoi. Veuillez réessayer."
+    },
+    "info": {
+      "email": "Email",
+      "phone": "Téléphone",
+      "location": "Localisation"
+    }
+  },
+  "footer": {
+    "rights": "Tous droits réservés",
+    "madeWith": "Fait avec",
+    "by": "par"
+  },
+  "common": {
+    "learnMore": "En savoir plus",
+    "viewAll": "Voir tout"
+  }
+}
