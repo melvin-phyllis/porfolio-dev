@@ -99,12 +99,10 @@ export default function Contact({ profile }: ContactProps) {
             <motion.div variants={fadeInLeft} className="space-y-8">
               <div>
                 <h3 className="text-2xl font-bold text-text mb-6">
-                  Discutons de votre projet
+                  {t("subtitle")}
                 </h3>
                 <p className="text-text-muted leading-relaxed">
-                  N&apos;hésitez pas à me contacter pour discuter de vos projets,
-                  poser des questions ou simplement dire bonjour. Je suis toujours
-                  ouverte à de nouvelles opportunités et collaborations.
+                  {t("description")}
                 </p>
               </div>
 
@@ -134,7 +132,7 @@ export default function Contact({ profile }: ContactProps) {
 
               {/* Social Links Visual */}
               <div className="p-6 rounded-2xl bg-primary/5 border border-border">
-                <p className="text-text-muted mb-4">Retrouvez-moi sur les réseaux sociaux</p>
+                <p className="text-text-muted mb-4">{t("social")}</p>
                 <div className="flex gap-4">
                   {["GitHub", "LinkedIn", "Twitter"].map((social) => (
                     <motion.div
@@ -200,7 +198,7 @@ export default function Contact({ profile }: ContactProps) {
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-300 text-text"
-                      placeholder="Projet Web"
+                      placeholder={t("form.subjectPlaceholder")}
                     />
                   </div>
 
@@ -217,7 +215,7 @@ export default function Contact({ profile }: ContactProps) {
                       required
                       rows={5}
                       className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-300 text-text resize-none"
-                      placeholder="Décrivez votre projet..."
+                      placeholder={t("form.messagePlaceholder")}
                     />
                   </div>
 

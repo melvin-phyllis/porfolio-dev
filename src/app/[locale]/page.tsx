@@ -1,4 +1,7 @@
-import { getProfile, getProjects, getSkills, getExperiences } from "@/lib/firebase-db";
+import { Metadata } from "next";
+import { getProfile, getProjects, getSkills, getExperiences, Profile, Project, Experience } from "@/lib/firebase-db";
+import { translateObject, translateArray } from "@/lib/translate";
+import { BreadcrumbSchema } from "@/components/JsonLd";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
@@ -9,54 +12,107 @@ import Testimonials from "@/components/sections/Testimonials";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
 
-// Force dynamic behavior because of db calls
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
-export default async function Home() {
-  // Parallel fetching for performance
-  const [profile, skills, allProjects, allExperiences] = await Promise.all([
-    getProfile(),
-    getSkills(),
-    getProjects(),
-    getExperiences()
-  ]);
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+    const { locale } = await params;
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zaerthnh.dev";
+    
+    return {
+        title: locale === "fr" 
+            ? "Accueil | Développeuse Fullstack & DevOps"
+            : "Home | Fullstack Developer & DevOps",
+        description: locale === "fr"
+            ? "Découvrez le portfolio de Marie Danielle Akpeuby, développeuse fullstack & DevOps. Expertise en React, Next.js, Node.js, Docker et Kubernetes."
+            : "Discover Marie Danielle Akpeuby's portfolio, fullstack developer & DevOps. Expertise in React, Next.js, Node.js, Docker and Kubernetes.",
+        alternates: {
+            canonical: `${baseUrl}/${locale}`,
+            languages: {
+                fr: `${baseUrl}/fr`,
+                en: `${baseUrl}/en`,
+            },
+        },
+        openGraph: {
+            url: `${baseUrl}/${locale}`,
+            locale: locale === "fr" ? "fr_FR" : "en_US",
+        },
+    };
+}
 
-  // Filter and sort in JS/TS
-  const projects = allProjects
-    .filter(p => p.featured)
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-    .slice(0, 3);
+export default async function Home({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}) {
+    const { locale } = await params;
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zaerthnh.dev";
 
-  const experiences = allExperiences
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()); // or by date field? Experience has 'date' string usually. Let's use createdAt or just ID if reliable. Prisma used ID desc. 
-  // Actually experience has `date` string like "2023 - 2024". CreatedAt is when I added it.
-  // Let's stick to createdAt for now as ID in Firebase is random string.
+    // Récupérer les données de Firebase
+    const [rawProfile, skills, allProjects, allExperiences] = await Promise.all([
+        getProfile(),
+        getSkills(),
+        getProjects(),
+        getExperiences(),
+    ]);
 
+    // Traduire automatiquement si la locale est anglais
+    const profile = rawProfile 
+        ? await translateObject<Profile>(
+            rawProfile,
+            ["headline", "subheadline", "about"],
+            locale
+          )
+        : rawProfile;
 
-  // Construct efficient data object
-  const heroData = profile ? {
-    name: "Marie Danielle Akpeuby", // Fallback name if not in profile or dynamic
-    title: profile.headline,
-    subtitle: profile.subheadline,
-    image: profile.image || "/images/profile.svg"
-  } : undefined;
+    const translatedProjects = await translateArray<Project>(
+        allProjects,
+        ["title", "description"],
+        locale
+    );
 
-  return (
-    <>
-      <Hero profile={profile} />
-      <About profile={profile} stats={[
-        { value: experiences.length, label: "experience" },
-        { value: projects.length, label: "projects" },
-        { value: 10, label: "clients" }, // Static for now
-        { value: skills.length, label: "technologies" },
-      ]} />
-      <Skills skills={skills} />
-      <Timeline experiences={experiences} />
-      <Projects projects={projects} />
-      <Services />
-      <Testimonials />
-      <FAQ />
-      <Contact profile={profile} />
-    </>
-  );
+    const translatedExperiences = await translateArray<Experience>(
+        allExperiences,
+        ["role", "company", "description"],
+        locale
+    );
+
+    const projects = translatedProjects
+        .filter((p) => p.featured)
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .slice(0, 3);
+
+    const experiences = translatedExperiences.sort(
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+
+    const breadcrumbItems = [
+        { name: locale === "fr" ? "Accueil" : "Home", url: `${baseUrl}/${locale}` },
+    ];
+
+    return (
+        <>
+            <BreadcrumbSchema items={breadcrumbItems} />
+            <Hero profile={profile} />
+            <About
+                profile={profile}
+                stats={[
+                    { value: experiences.length, label: "experience" },
+                    { value: projects.length, label: "projects" },
+                    { value: 10, label: "clients" },
+                    { value: skills.length, label: "technologies" },
+                ]}
+            />
+            <Skills skills={skills} />
+            <Timeline experiences={experiences} />
+            <Projects projects={projects} />
+            <Services />
+            <Testimonials />
+            <FAQ />
+            <Contact profile={profile} />
+        </>
+    );
 }

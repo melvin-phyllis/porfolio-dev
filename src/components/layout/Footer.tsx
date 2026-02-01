@@ -63,7 +63,7 @@ export default function Footer() {
           {/* Copyright */}
           <div className="text-center md:text-right">
             <p className="text-text-muted text-sm flex items-center justify-center md:justify-end gap-1">
-              {t("madeWith")} <Heart className="w-4 h-4 text-primary fill-primary" /> {t("by")}{" "}
+              {t("madeWith")}  {t("by")}{" "}
               <span className="text-text font-medium">{personalInfo.name.split(" ")[0]}</span>
             </p>
             <p className="text-text-muted text-sm mt-1">
@@ -71,7 +71,7 @@ export default function Footer() {
             </p>
             <div className="mt-2">
               <Link href="/admin/login" className="text-xs text-text-muted hover:text-primary transition-colors">
-                Connexion
+                {t("login")}
               </Link>
             </div>
           </div>

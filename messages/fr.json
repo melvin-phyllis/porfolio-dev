@@ -20,7 +20,8 @@
       "projects": "Voir mes projets",
       "contact": "Me contacter"
     },
-    "roles": ["Développeuse Fullstack", "Experte DevOps", "Passionnée d'IA"]
+    "roles": ["Développeuse Fullstack", "Experte DevOps", "Passionnée d'IA"],
+    "scroll": "Défiler"
   },
   "about": {
     "title": "À propos de moi",
@@ -36,6 +37,8 @@
   "skills": {
     "title": "Compétences",
     "subtitle": "Technologies et outils que je maîtrise",
+    "all": "Toutes",
+    "noSkills": "Aucune compétence configurée.",
     "categories": {
       "frontend": "Frontend",
       "backend": "Backend",
@@ -46,7 +49,10 @@
   },
   "experience": {
     "title": "Expérience & Formation",
-    "subtitle": "Mon parcours professionnel et académique"
+    "subtitle": "Mon parcours professionnel et académique",
+    "work": "Expérience",
+    "education": "Formation",
+    "noExperience": "Aucune expérience ajoutée."
   },
   "projects": {
     "title": "Mes Projets",
@@ -54,6 +60,7 @@
     "viewProject": "Voir le projet",
     "viewCode": "Voir le code",
     "all": "Tous",
+    "noProjects": "Aucun projet trouvé.",
     "filters": {
       "all": "Tous",
       "frontend": "Frontend",
@@ -65,6 +72,7 @@
   "services": {
     "title": "Mes Services",
     "subtitle": "Comment je peux vous aider",
+    "learnMore": "En savoir plus",
     "items": {
       "web": {
         "title": "Développement Web",
@@ -86,7 +94,27 @@
   },
   "testimonials": {
     "title": "Témoignages",
-    "subtitle": "Ce que disent mes clients"
+    "subtitle": "Ce que disent mes clients",
+    "items": [
+      {
+        "name": "Jean-Pierre Kouadio",
+        "role": "CEO, TechStart Abidjan",
+        "content": "Marie Danielle a transformé notre vision en une application web performante. Sa maîtrise technique et son professionnalisme sont remarquables.",
+        "image": "/images/testimonials/client1.jpg"
+      },
+      {
+        "name": "Fatou Diallo",
+        "role": "CTO, InnovaCI",
+        "content": "Excellente collaboration sur notre projet de microservices. Son expertise DevOps nous a permis d'améliorer considérablement notre pipeline de déploiement.",
+        "image": "/images/testimonials/client2.jpg"
+      },
+      {
+        "name": "Amadou Traoré",
+        "role": "Founder, DataSmart",
+        "content": "L'intégration IA qu'elle a réalisée pour notre chatbot a dépassé nos attentes. Un travail de qualité livré dans les délais.",
+        "image": "/images/testimonials/client3.jpg"
+      }
+    ]
   },
   "faq": {
     "title": "Questions Fréquentes",
@@ -113,11 +141,15 @@
   "contact": {
     "title": "Contactez-moi",
     "subtitle": "Discutons de votre projet",
+    "description": "N'hésitez pas à me contacter pour discuter de vos projets, poser des questions ou simplement dire bonjour. Je suis toujours ouverte à de nouvelles opportunités et collaborations.",
+    "social": "Retrouvez-moi sur les réseaux sociaux",
     "form": {
       "name": "Votre nom",
       "email": "Votre email",
       "subject": "Sujet",
+      "subjectPlaceholder": "Projet Web",
       "message": "Votre message",
+      "messagePlaceholder": "Décrivez votre projet...",
       "send": "Envoyer",
       "sending": "Envoi en cours...",
       "success": "Message envoyé avec succès !",
@@ -131,11 +163,23 @@
   },
   "footer": {
     "rights": "Tous droits réservés",
-    "madeWith": "Fait avec",
-    "by": "par"
+    "madeWith": "Projet réalisé",
+    "by": "par",
+    "login": "Connexion"
   },
   "common": {
     "learnMore": "En savoir plus",
     "viewAll": "Voir tout"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Découvrez mes articles, tutoriels et réflexions sur le développement web",
+    "search": "Rechercher un article...",
+    "allCategories": "Toutes",
+    "noArticles": "Aucun article trouvé",
+    "readMore": "Lire la suite",
+    "backToBlog": "Retour au blog",
+    "author": "Auteur",
+    "relatedArticles": "Articles similaires"
   }
 }

@@ -3,16 +3,24 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 import { Quote, ChevronLeft, ChevronRight, User } from "lucide-react";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
-import { testimonials } from "@/lib/data";
+
+interface Testimonial {
+  name: string;
+  role: string;
+  content: string;
+  image: string;
+}
 
 export default function Testimonials() {
   const t = useTranslations("testimonials");
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
+
+  // Get testimonials from translations
+  const testimonials = t.raw("items") as Testimonial[];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -20,7 +28,7 @@ export default function Testimonials() {
       setCurrent((prev) => (prev + 1) % testimonials.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [testimonials.length]);
 
   const next = () => {
     setDirection(1);

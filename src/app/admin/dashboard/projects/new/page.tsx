@@ -4,8 +4,8 @@ export default function NewProjectPage() {
     return (
         <div className="space-y-6">
             <div>
-                <h1 className="text-3xl font-bold tracking-tight">Nouveau Projet</h1>
-                <p className="text-muted-foreground">
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Nouveau Projet</h1>
+                <p className="text-gray-600 dark:text-neutral-400 mt-1">
                     Ajoutez un projet à votre portfolio.
                 </p>
             </div>

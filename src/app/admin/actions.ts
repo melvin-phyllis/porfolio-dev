@@ -5,11 +5,13 @@ import { projectSchema, ProjectFormValues } from "@/lib/validations/project";
 import { skillSchema, SkillFormValues } from "@/lib/validations/skill";
 import { experienceSchema, ExperienceFormValues } from "@/lib/validations/experience";
 import { profileSchema, ProfileFormValues } from "@/lib/validations/profile";
+import { articleSchema, ArticleFormValues } from "@/lib/validations/article";
 import {
     createProjectDB, updateProjectDB, deleteProjectDB,
     createSkillDB, updateSkillDB, deleteSkillDB,
     createExperienceDB, updateExperienceDB, deleteExperienceDB,
-    updateProfileDB
+    updateProfileDB,
+    createArticleDB, updateArticleDB, deleteArticleDB
 } from "@/lib/firebase-db";
 
 // PROJECTS
@@ -34,6 +36,9 @@ export async function createProject(data: ProjectFormValues) {
     await createProjectDB({
         ...validated,
         tags: tagsToStore,
+        link: validated.link || "",
+        github: validated.github || "",
+        image: validated.image || "",
         createdAt: new Date(),
         updatedAt: new Date()
     });
@@ -54,6 +59,9 @@ export async function updateProject(id: string, data: ProjectFormValues) {
     await updateProjectDB(id, {
         ...validated,
         tags: tagsToStore,
+        link: validated.link || "",
+        github: validated.github || "",
+        image: validated.image || "",
         updatedAt: new Date()
     });
 
@@ -73,6 +81,8 @@ export async function createSkill(data: SkillFormValues) {
     const validated = skillSchema.parse(data);
     await createSkillDB({
         ...validated,
+        icon: validated.icon || null,
+        color: validated.color || null,
         createdAt: new Date(),
         updatedAt: new Date()
     });
@@ -84,6 +94,8 @@ export async function updateSkill(id: string, data: SkillFormValues) {
     const validated = skillSchema.parse(data);
     await updateSkillDB(id, {
         ...validated,
+        icon: validated.icon || null,
+        color: validated.color || null,
         updatedAt: new Date()
     });
     revalidatePath('/admin/dashboard/skills');
@@ -131,5 +143,58 @@ export async function updateProfile(data: ProfileFormValues) {
     const validated = profileSchema.parse(data);
     await updateProfileDB(validated);
     revalidatePath('/admin/dashboard/profile');
+    revalidatePath('/');
+}
+
+// ARTICLES
+
+export async function createArticle(data: ArticleFormValues) {
+    const validated = articleSchema.parse(data);
+
+    let tagsToStore = validated.tags;
+    if (!tagsToStore.trim().startsWith("[")) {
+        const arr = tagsToStore.split(',').map(t => t.trim()).filter(Boolean);
+        tagsToStore = JSON.stringify(arr);
+    }
+
+    await createArticleDB({
+        ...validated,
+        tags: tagsToStore,
+        image: validated.image || "",
+        views: 0,
+        createdAt: new Date(),
+        updatedAt: new Date()
+    });
+
+    revalidatePath('/admin/dashboard/articles');
+    revalidatePath('/blog');
+    revalidatePath('/');
+}
+
+export async function updateArticle(id: string, data: ArticleFormValues) {
+    const validated = articleSchema.parse(data);
+
+    let tagsToStore = validated.tags;
+    if (!tagsToStore.trim().startsWith("[")) {
+        const arr = tagsToStore.split(',').map(t => t.trim()).filter(Boolean);
+        tagsToStore = JSON.stringify(arr);
+    }
+
+    await updateArticleDB(id, {
+        ...validated,
+        tags: tagsToStore,
+        image: validated.image || "",
+        updatedAt: new Date()
+    });
+
+    revalidatePath('/admin/dashboard/articles');
+    revalidatePath('/blog');
+    revalidatePath('/');
+}
+
+export async function deleteArticle(id: string) {
+    await deleteArticleDB(id);
+    revalidatePath('/admin/dashboard/articles');
+    revalidatePath('/blog');
     revalidatePath('/');
 }

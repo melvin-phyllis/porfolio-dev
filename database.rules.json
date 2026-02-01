@@ -1,6 +1,14 @@
 {
     "rules": {
         ".read": true,
-        ".write": false
+        ".write": false,
+        "analytics": {
+            "pageViews": {
+                ".indexOn": ["timestamp"]
+            },
+            "events": {
+                ".indexOn": ["timestamp"]
+            }
+        }
     }
 }

@@ -12,12 +12,12 @@ import {
 export const personalInfo = {
   name: "Marie Danielle Akpeuby",
   title: "Développeuse Fullstack & DevOps",
-  email: "yapomariedanielle0@gmail.com",
+  email: "yapozaerthnh0@gmail.com",
   phone: "+225 0595875899",
   location: "Côte d'Ivoire",
-  github: "https://github.com/mariedanielle",
-  linkedin: "https://linkedin.com/in/mariedanielle",
-  twitter: "https://twitter.com/mariedanielle",
+  github: "https://github.com/zaerthnh",
+  linkedin: "https://linkedin.com/in/zaerthnh",
+  twitter: "https://twitter.com/zaerthnh",
 };
 
 export const stats = [
@@ -122,7 +122,7 @@ export const projects = [
     image: "/images/projects/blog-api.jpg",
     technologies: ["Node.js", "Express", "MongoDB", "JWT"],
     category: "backend",
-    github: "https://github.com/mariedanielle/blog-api",
+    github: "https://github.com/zaerthnh/blog-api",
     demo: "",
   },
   {
@@ -133,7 +133,7 @@ export const projects = [
     image: "/images/projects/dashboard.jpg",
     technologies: ["React", "Next.js", "Chart.js", "Tailwind"],
     category: "fullstack",
-    github: "https://github.com/mariedanielle/dashboard",
+    github: "https://github.com/zaerthnh/dashboard",
     demo: "",
   },
   {
@@ -144,7 +144,7 @@ export const projects = [
     image: "/images/projects/ai-agent.jpg",
     technologies: ["Python", "CrewAI", "LangChain", "FastAPI"],
     category: "backend",
-    github: "https://github.com/mariedanielle/ai-agent",
+    github: "https://github.com/zaerthnh/ai-agent",
     demo: "",
   },
   {
@@ -155,7 +155,7 @@ export const projects = [
     image: "/images/projects/k8s.jpg",
     technologies: ["Docker", "Kubernetes", "GitHub Actions", "Terraform"],
     category: "devops",
-    github: "https://github.com/mariedanielle/k8s-infra",
+    github: "https://github.com/zaerthnh/k8s-infra",
     demo: "",
   },
   {
@@ -166,7 +166,7 @@ export const projects = [
     image: "/images/projects/ecommerce.jpg",
     technologies: ["Next.js", "Node.js", "PostgreSQL", "Stripe"],
     category: "fullstack",
-    github: "https://github.com/mariedanielle/ecommerce",
+    github: "https://github.com/zaerthnh/ecommerce",
     demo: "",
   },
   {
@@ -177,7 +177,7 @@ export const projects = [
     image: "/images/projects/portfolio.jpg",
     technologies: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
     category: "frontend",
-    github: "https://github.com/mariedanielle/portfolio",
+    github: "https://github.com/zaerthnh/portfolio",
     demo: "",
   },
 ];
@@ -231,17 +231,17 @@ export const testimonials = [
 export const socialLinks = [
   {
     name: "GitHub",
-    url: "https://github.com/mariedanielle",
+    url: "https://github.com/zaerthnh",
     icon: "github",
   },
   {
     name: "LinkedIn",
-    url: "https://linkedin.com/in/mariedanielle",
+    url: "https://linkedin.com/in/zaerthnh",
     icon: "linkedin",
   },
   {
     name: "Twitter",
-    url: "https://twitter.com/mariedanielle",
+    url: "https://twitter.com/zaerthnh",
     icon: "twitter",
   },
 ];

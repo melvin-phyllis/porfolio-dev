@@ -200,6 +200,7 @@ export default function Hero({ profile }: HeroProps) {
                   fill
                   className="object-cover"
                   priority
+                  sizes="(max-width: 640px) 256px, (max-width: 1024px) 320px, 384px"
                 />
               </motion.div>
 
@@ -242,7 +243,7 @@ export default function Hero({ profile }: HeroProps) {
             className="flex flex-col items-center gap-2 cursor-pointer"
             onClick={() => scrollToSection("about")}
           >
-            <span className="text-text-muted text-sm">Scroll</span>
+            <span className="text-text-muted text-sm">{t("scroll")}</span>
             <ArrowDown className="w-5 h-5 text-primary" />
           </motion.div>
         </motion.div>

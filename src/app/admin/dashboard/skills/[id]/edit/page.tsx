@@ -40,7 +40,8 @@ export default async function EditSkillPage({ params }: EditSkillPageProps) {
 
     const initialData = {
         ...skill,
-        color: "#ffffff" // Default fallback if not in DB
+        icon: skill.icon || "",
+        color: skill.color || "#ffffff"
     };
 
     return (

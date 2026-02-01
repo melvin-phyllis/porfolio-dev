@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { Loader2 } from "lucide-react"
+import { Loader2, Save, X, ArrowLeft } from "lucide-react"
+import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -31,7 +32,6 @@ export function ExperienceForm({ initialData }: ExperienceFormProps) {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
 
-    // Ensure defaultValues matches the schema type exactly
     const form = useForm<ExperienceFormValues>({
         resolver: zodResolver(experienceSchema),
         defaultValues: {
@@ -61,94 +61,138 @@ export function ExperienceForm({ initialData }: ExperienceFormProps) {
     }
 
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <div className="grid grid-cols-2 gap-4">
-                    <FormField
-                        control={form.control}
-                        name="role"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Rôle / Poste</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Ex: Développeur Full Stack" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="company"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Entreprise</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Ex: Google" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+        <div className="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/3">
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200 dark:border-gray-800">
+                <div>
+                    <h2 className="text-lg font-semibold text-gray-800 dark:text-white/90">
+                        {initialData ? "Modifier l'expérience" : "Nouvelle expérience"}
+                    </h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                        {initialData ? "Mettez à jour les informations" : "Ajoutez une nouvelle expérience professionnelle"}
+                    </p>
                 </div>
+                <Link href="/admin/dashboard/experiences">
+                    <Button variant="ghost" size="sm">
+                        <ArrowLeft className="mr-2 h-4 w-4" />
+                        Retour
+                    </Button>
+                </Link>
+            </div>
 
-                <FormField
-                    control={form.control}
-                    name="date"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Période</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Ex: 2023 - Présent" {...field} />
-                            </FormControl>
-                            <FormDescription>Format libre (ex: Jan 2023 - Dec 2024)</FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+            {/* Form */}
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 space-y-6">
+                    <div className="grid gap-6 md:grid-cols-2">
+                        <FormField
+                            control={form.control}
+                            name="role"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-gray-700 dark:text-gray-300">Rôle / Poste</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Ex: Développeur Full Stack" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="company"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-gray-700 dark:text-gray-300">Entreprise</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Ex: Google" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
 
-                <FormField
-                    control={form.control}
-                    name="description"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Description</FormLabel>
-                            <FormControl>
-                                <Textarea className="min-h-[120px]" placeholder="Responsabilités, réalisations..." {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={form.control}
-                    name="current"
-                    render={({ field }) => (
-                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow">
-                            <FormControl>
-                                <Checkbox
-                                    checked={field.value}
-                                    onCheckedChange={field.onChange}
-                                />
-                            </FormControl>
-                            <div className="space-y-1 leading-none">
-                                <FormLabel>
-                                    Poste actuel
-                                </FormLabel>
-                                <FormDescription>
-                                    Cochez si vous occupez toujours ce poste.
+                    <FormField
+                        control={form.control}
+                        name="date"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel className="text-gray-700 dark:text-gray-300">Période</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Ex: 2023 - Présent" {...field} />
+                                </FormControl>
+                                <FormDescription className="text-gray-500 dark:text-gray-400">
+                                    Format libre (ex: Jan 2023 - Dec 2024)
                                 </FormDescription>
-                            </div>
-                        </FormItem>
-                    )}
-                />
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
 
-                <Button type="submit" disabled={isLoading}>
-                    {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    {initialData ? "Mettre à jour" : "Ajouter l'expérience"}
-                </Button>
-            </form>
-        </Form>
+                    <FormField
+                        control={form.control}
+                        name="description"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel className="text-gray-700 dark:text-gray-300">Description</FormLabel>
+                                <FormControl>
+                                    <Textarea 
+                                        className="min-h-[120px]" 
+                                        placeholder="Responsabilités, réalisations..." 
+                                        {...field} 
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="current"
+                        render={({ field }) => (
+                            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-xl border border-gray-200 dark:border-gray-800 p-4 bg-gray-50 dark:bg-white/2">
+                                <FormControl>
+                                    <Checkbox
+                                        checked={field.value}
+                                        onCheckedChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <div className="space-y-1 leading-none">
+                                    <FormLabel className="text-gray-800 dark:text-white/90">
+                                        Poste actuel
+                                    </FormLabel>
+                                    <FormDescription className="text-gray-500 dark:text-gray-400">
+                                        Cochez si vous occupez toujours ce poste.
+                                    </FormDescription>
+                                </div>
+                            </FormItem>
+                        )}
+                    />
+
+                    {/* Actions */}
+                    <div className="flex items-center gap-3 pt-4 border-t border-gray-200 dark:border-gray-800">
+                        <Button 
+                            type="submit" 
+                            variant="success"
+                            disabled={isLoading}
+                        >
+                            {isLoading ? (
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            ) : (
+                                <Save className="mr-2 h-4 w-4" />
+                            )}
+                            {initialData ? "Mettre à jour" : "Ajouter"}
+                        </Button>
+                        <Link href="/admin/dashboard/experiences">
+                            <Button type="button" variant="outline">
+                                <X className="mr-2 h-4 w-4" />
+                                Annuler
+                            </Button>
+                        </Link>
+                    </div>
+                </form>
+            </Form>
+        </div>
     )
 }

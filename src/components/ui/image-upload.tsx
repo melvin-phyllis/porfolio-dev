@@ -52,6 +52,7 @@ export function ImageUpload({ value, onChange, onRemove }: ImageUploadProps) {
                     style={{ objectFit: "cover" }}
                     alt="Image"
                     src={value}
+                    sizes="(max-width: 768px) 100vw, 400px"
                 />
             </div>
         );

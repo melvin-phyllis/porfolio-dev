@@ -55,6 +55,7 @@ export function FileUpload({ value, onChange, onRemove, accept = "image/*", type
                         style={{ objectFit: "cover" }}
                         alt="Upload"
                         src={value}
+                        sizes="(max-width: 768px) 100vw, 400px"
                     />
                 ) : (
                     <div className="flex flex-col items-center">

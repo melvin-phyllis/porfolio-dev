@@ -1,30 +1,76 @@
 @import "tailwindcss";
 
+/* ============================================
+   BASE THEME VARIABLES - Portfolio Public Site
+   ============================================ */
 :root {
-  /* Nouveau thème minimaliste - Style Anuj Magar */
-  /* Accent blanc lumineux */
+  /* Theme minimaliste noir/blanc pour le portfolio public */
   --primary: #ffffff;
   --primary-light: #f5f5f5;
   --primary-dark: #e5e5e5;
   --primary-muted: rgba(255, 255, 255, 0.1);
 
-  /* Fond noir profond */
   --background: #000000;
   --background-light: #0a0a0a;
   --surface: #111111;
   --surface-light: #1a1a1a;
 
-  /* Texte - blanc principal, gris pour secondaire */
   --text: #ffffff;
-  --text-muted: #999999;
-  --text-subtle: #666666;
+  --text-muted: #b3b3b3;
+  --text-subtle: #808080;
 
-  /* Bordures */
   --border: #222222;
   --border-light: #333333;
 
-  /* Accent secondaire optionnel - gris chaud */
   --accent: #888888;
+
+  --accent-success: #10b981;
+  --accent-warning: #f59e0b;
+  --accent-error: #ef4444;
+  --accent-info: #3b82f6;
+
+  /* Shadcn Variables - Base (Light) */
+  --foreground: 0 0% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 3.9%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent-hsl: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --input: 0 0% 89.8%;
+  --ring: 0 0% 3.9%;
+  --radius: 0.5rem;
+}
+
+/* ============================================
+   DARK THEME - Admin Panel & Dark Mode
+   ============================================ */
+.dark {
+  --background: #050505;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 6%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 6%;
+  --popover-foreground: 0 0% 98%;
+  --primary-hsl: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 10%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 63.9%;
+  --accent-hsl: 0 0% 15%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 14.9%;
+  --input: 0 0% 14.9%;
+  --ring: 0 0% 83.1%;
 }
 
 @theme inline {
@@ -42,20 +88,23 @@
   --color-border: var(--border);
   --color-border-light: var(--border-light);
   --color-accent: var(--accent);
+  --color-success: var(--accent-success);
+  --color-warning: var(--accent-warning);
+  --color-error: var(--accent-error);
+  --color-info: var(--accent-info);
   --font-sans: var(--font-poppins);
 }
 
-/* Hide scrollbar but keep scroll functionality */
+/* ============================================
+   BASE STYLES
+   ============================================ */
 * {
   scrollbar-width: none;
-  /* Firefox */
   -ms-overflow-style: none;
-  /* IE and Edge */
 }
 
 *::-webkit-scrollbar {
   display: none;
-  /* Chrome, Safari, Opera */
 }
 
 html {
@@ -69,7 +118,157 @@ body {
   overflow-x: hidden;
 }
 
-/* Gradient text utility - maintenant monochrome */
+/* ============================================
+   ADMIN DASHBOARD - EXPLICIT DARK THEME STYLES
+   ============================================ */
+
+/* All admin forms - Labels */
+.dark label,
+.dark [class*="FormLabel"] {
+  color: #e5e5e5 !important;
+  font-weight: 500;
+}
+
+/* All admin forms - Descriptions */
+.dark .text-muted-foreground,
+.dark [class*="FormDescription"] {
+  color: #a1a1a1 !important;
+}
+
+/* All admin forms - Inputs */
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: #111111 !important;
+  border-color: #262626 !important;
+  color: #ffffff !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #666666 !important;
+}
+
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus {
+  border-color: #404040 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Checkboxes */
+.dark [role="checkbox"] {
+  border-color: #404040 !important;
+  background-color: #111111 !important;
+}
+
+.dark [role="checkbox"][data-state="checked"] {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Select/Combobox */
+.dark [role="combobox"],
+.dark [data-radix-select-trigger] {
+  background-color: #111111 !important;
+  border-color: #262626 !important;
+  color: #ffffff !important;
+}
+
+.dark [role="listbox"],
+.dark [data-radix-select-content] {
+  background-color: #111111 !important;
+  border-color: #262626 !important;
+}
+
+.dark [role="option"] {
+  color: #e5e5e5 !important;
+}
+
+.dark [role="option"]:hover,
+.dark [role="option"][data-highlighted] {
+  background-color: #1f1f1f !important;
+}
+
+/* Buttons in admin */
+.dark button[type="submit"] {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.dark button[type="submit"]:hover {
+  background-color: #e5e5e5;
+}
+
+/* Tables */
+.dark table {
+  border-color: #1f1f1f;
+}
+
+.dark th {
+  color: #a1a1a1 !important;
+  border-color: #1f1f1f !important;
+  background-color: #0a0a0a !important;
+}
+
+.dark td {
+  color: #e5e5e5 !important;
+  border-color: #1f1f1f !important;
+}
+
+.dark tr {
+  border-color: #1f1f1f !important;
+}
+
+.dark tr:hover {
+  background-color: #111111 !important;
+}
+
+/* Dialogs/Modals */
+.dark [role="dialog"],
+.dark [role="alertdialog"] {
+  background-color: #111111 !important;
+  border-color: #262626 !important;
+}
+
+.dark [role="dialog"] h2,
+.dark [role="alertdialog"] h2 {
+  color: #ffffff !important;
+}
+
+/* Dropdown menus */
+.dark [role="menu"] {
+  background-color: #111111 !important;
+  border-color: #262626 !important;
+}
+
+.dark [role="menuitem"] {
+  color: #e5e5e5 !important;
+}
+
+.dark [role="menuitem"]:hover,
+.dark [role="menuitem"]:focus {
+  background-color: #1f1f1f !important;
+  color: #ffffff !important;
+}
+
+/* Progress bars */
+.dark [role="progressbar"] {
+  background-color: #1a1a1a !important;
+}
+
+/* Cards */
+.dark [class*="Card"] {
+  background-color: #111111;
+  border-color: #1f1f1f;
+}
+
+/* ============================================
+   PORTFOLIO PUBLIC SITE UTILITIES
+   ============================================ */
+
 .gradient-text {
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
   -webkit-background-clip: text;
@@ -77,7 +276,6 @@ body {
   background-clip: text;
 }
 
-/* Gradient border - simplifié */
 .gradient-border {
   position: relative;
   border-radius: 1rem;
@@ -96,7 +294,6 @@ body {
   mask-composite: exclude;
 }
 
-/* Glow effect - blanc subtil */
 .glow {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.1),
     0 0 40px rgba(255, 255, 255, 0.05);
@@ -106,7 +303,6 @@ body {
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
-/* Animated background gradient - simplifié */
 .animated-gradient {
   background: linear-gradient(-45deg, var(--primary), var(--primary-light), var(--primary-dark), var(--primary));
   background-size: 400% 400%;
@@ -114,54 +310,29 @@ body {
 }
 
 @keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* Floating animation */
 @keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-20px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
 }
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
 
-/* Pulse glow animation - blanc subtil */
 @keyframes pulse-glow {
-
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-  }
-
-  50% {
-    box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
-  }
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.2); }
 }
 
 .animate-pulse-glow {
   animation: pulse-glow 3s ease-in-out infinite;
 }
 
-/* Section padding */
 .section {
   padding: 6rem 1rem;
 }
@@ -172,14 +343,12 @@ body {
   }
 }
 
-/* Glass effect - ajusté pour fond noir */
 .glass {
   background: rgba(23, 23, 23, 0.8);
   backdrop-filter: blur(10px);
   border: 1px solid var(--border);
 }
 
-/* Card hover effect */
 .card-hover {
   transition: all 0.3s ease;
 }
@@ -188,3 +357,33 @@ body {
   transform: translateY(-4px);
   box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
 }
+
+/* Accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Status utilities */
+.text-success { color: var(--accent-success); }
+.text-warning { color: var(--accent-warning); }
+.text-error { color: var(--accent-error); }
+.text-info { color: var(--accent-info); }
+.bg-success { background-color: var(--accent-success); }
+.bg-warning { background-color: var(--accent-warning); }
+.bg-error { background-color: var(--accent-error); }
+.bg-info { background-color: var(--accent-info); }

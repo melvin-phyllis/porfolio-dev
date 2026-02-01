@@ -17,6 +17,7 @@ const navItems = [
   { href: "#testimonials", key: "testimonials" },
   { href: "#faq", key: "faq" },
   { href: "#contact", key: "contact" },
+  { href: "/blog", key: "blog", isPage: true },
 ];
 
 export default function Navbar() {
@@ -92,7 +93,16 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-1">
-              {navItems.map((item) => (
+              {navItems.map((item) =>
+                (item as { isPage?: boolean }).isPage ? (
+                  <Link
+                    key={item.key}
+                    href={item.href}
+                    className="px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 text-text-muted hover:text-text hover:bg-surface-light/50"
+                  >
+                    {t(item.key)}
+                  </Link>
+                ) : (
                 <motion.a
                   key={item.key}
                   href={item.href}
@@ -109,7 +119,8 @@ export default function Navbar() {
                 >
                   {t(item.key)}
                 </motion.a>
-              ))}
+                )
+              )}
             </div>
 
             {/* Right side buttons */}
@@ -161,7 +172,26 @@ export default function Navbar() {
             />
             <motion.div className="absolute left-0 top-0 h-full w-80 bg-background border-r border-border p-6 pt-24">
               <div className="flex flex-col gap-2">
-                {navItems.map((item, index) => (
+                {navItems.map((item, index) =>
+                  (item as { isPage?: boolean }).isPage ? (
+                    <motion.div
+                      key={item.key}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{
+                        opacity: 1,
+                        x: 0,
+                        transition: { delay: index * 0.05 },
+                      }}
+                    >
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block px-4 py-3 text-lg font-medium rounded-lg transition-all duration-300 text-text-muted hover:text-text hover:bg-surface-light/50"
+                      >
+                        {t(item.key)}
+                      </Link>
+                    </motion.div>
+                  ) : (
                   <motion.a
                     key={item.key}
                     href={item.href}
@@ -182,7 +212,8 @@ export default function Navbar() {
                   >
                     {t(item.key)}
                   </motion.a>
-                ))}
+                  )
+                )}
               </div>
             </motion.div>
           </motion.div>

@@ -51,7 +51,6 @@ export function ProfileForm({ initialData }: ProfileFormProps) {
         try {
             await updateProfile(data)
             router.refresh()
-            // Could add toast here
         } catch (error) {
             console.error(error)
         } finally {
@@ -61,40 +60,48 @@ export function ProfileForm({ initialData }: ProfileFormProps) {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <div className="grid gap-6 border p-4 rounded-lg bg-card text-card-foreground shadow-sm">
-                    <h2 className="text-xl font-semibold">Informations Générales (Hero)</h2>
-                    <FormField
-                        control={form.control}
-                        name="headline"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Titre Principal</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Développeuse Full Stack..." {...field} />
-                                </FormControl>
-                                <FormDescription>C'est ce qui apparaît en gros sur la page d'accueil.</FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="subheadline"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Sous-titre / Slogan</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Créatrice d'expériences web..." {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                {/* Hero Section */}
+                <div className="rounded-xl border border-gray-200 dark:border-[#262626] bg-white dark:bg-[#111111] p-6">
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                        Informations Générales (Hero)
+                    </h2>
+                    <div className="space-y-4">
+                        <FormField
+                            control={form.control}
+                            name="headline"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Titre Principal</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Développeuse Full Stack..." {...field} />
+                                    </FormControl>
+                                    <FormDescription>C&apos;est ce qui apparaît en gros sur la page d&apos;accueil.</FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="subheadline"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Sous-titre / Slogan</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Créatrice d'expériences web..." {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
                 </div>
 
-                <div className="grid gap-6 border p-4 rounded-lg bg-card text-card-foreground shadow-sm">
-                    <h2 className="text-xl font-semibold">À Propos</h2>
+                {/* About Section */}
+                <div className="rounded-xl border border-gray-200 dark:border-[#262626] bg-white dark:bg-[#111111] p-6">
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                        À Propos
+                    </h2>
                     <FormField
                         control={form.control}
                         name="about"
@@ -110,9 +117,12 @@ export function ProfileForm({ initialData }: ProfileFormProps) {
                     />
                 </div>
 
-                <div className="grid gap-6 border p-4 rounded-lg bg-card text-card-foreground shadow-sm">
-                    <h2 className="text-xl font-semibold">Réseaux Sociaux & Contact</h2>
-                    <div className="grid grid-cols-2 gap-4">
+                {/* Social Links */}
+                <div className="rounded-xl border border-gray-200 dark:border-[#262626] bg-white dark:bg-[#111111] p-6">
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                        Réseaux Sociaux & Contact
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <FormField
                             control={form.control}
                             name="email"
@@ -168,8 +178,11 @@ export function ProfileForm({ initialData }: ProfileFormProps) {
                     </div>
                 </div>
 
-                <div className="grid gap-6 border p-4 rounded-lg bg-card text-card-foreground shadow-sm">
-                    <h2 className="text-xl font-semibold">Image de Profil</h2>
+                {/* Profile Image */}
+                <div className="rounded-xl border border-gray-200 dark:border-[#262626] bg-white dark:bg-[#111111] p-6">
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                        Image de Profil
+                    </h2>
                     <FormField
                         control={form.control}
                         name="image"
@@ -191,8 +204,11 @@ export function ProfileForm({ initialData }: ProfileFormProps) {
                     />
                 </div>
 
-                <div className="grid gap-6 border p-4 rounded-lg bg-card text-card-foreground shadow-sm">
-                    <h2 className="text-xl font-semibold">Fichiers</h2>
+                {/* Resume */}
+                <div className="rounded-xl border border-gray-200 dark:border-[#262626] bg-white dark:bg-[#111111] p-6">
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                        Fichiers
+                    </h2>
                     <FormField
                         control={form.control}
                         name="resumeUrl"

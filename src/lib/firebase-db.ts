@@ -33,8 +33,8 @@ export interface Skill {
     name: string;
     level: number;
     category: string;
-    icon: string;
-    color?: string | null;
+    icon: string | null;
+    color: string | null;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -46,6 +46,23 @@ export interface Experience {
     date: string;
     description: string;
     current: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface Article {
+    id: string;
+    title: string;
+    slug: string;
+    excerpt: string;
+    content: string;
+    image: string;
+    category: string;
+    tags: string;
+    author: string;
+    published: boolean;
+    featured: boolean;
+    views: number;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -115,6 +132,8 @@ export async function getSkills() {
     return Object.entries(data).map(([id, val]: [string, any]) => ({
         id,
         ...val,
+        icon: val.icon || null,
+        color: val.color || null,
         createdAt: val.createdAt ? new Date(val.createdAt) : new Date(),
         updatedAt: val.updatedAt ? new Date(val.updatedAt) : new Date(),
     })) as Skill[];
@@ -209,4 +228,285 @@ export async function updateExperienceDB(id: string, data: Partial<Experience>) 
 
 export async function deleteExperienceDB(id: string) {
     await db.ref(`experiences/${id}`).remove();
+}
+
+// --- Articles ---
+
+export async function getArticles() {
+    const snapshot = await db.ref("articles").once("value");
+    const data = snapshot.val();
+    if (!data) return [];
+
+    return Object.entries(data).map(([id, val]: [string, any]) => {
+        let tags = val.tags;
+        if (Array.isArray(tags)) {
+            tags = JSON.stringify(tags);
+        } else if (!tags) {
+            tags = "[]";
+        }
+
+        return {
+            id,
+            ...val,
+            tags,
+            views: val.views || 0,
+            createdAt: val.createdAt ? new Date(val.createdAt) : new Date(),
+            updatedAt: val.updatedAt ? new Date(val.updatedAt) : new Date(),
+        };
+    }) as Article[];
+}
+
+export async function getArticle(id: string) {
+    const snapshot = await db.ref(`articles/${id}`).once("value");
+    const val = snapshot.val();
+    if (!val) return null;
+
+    let tags = val.tags;
+    if (Array.isArray(tags)) {
+        tags = JSON.stringify(tags);
+    } else if (!tags) {
+        tags = "[]";
+    }
+
+    return {
+        id,
+        ...val,
+        tags,
+        views: val.views || 0,
+        createdAt: val.createdAt ? new Date(val.createdAt) : new Date(),
+        updatedAt: val.updatedAt ? new Date(val.updatedAt) : new Date(),
+    } as Article;
+}
+
+export async function getArticleBySlug(slug: string) {
+    const snapshot = await db.ref("articles").orderByChild("slug").equalTo(slug).once("value");
+    const data = snapshot.val();
+    if (!data) return null;
+
+    const entries = Object.entries(data);
+    if (entries.length === 0) return null;
+
+    const [id, val] = entries[0] as [string, any];
+    let tags = val.tags;
+    if (Array.isArray(tags)) {
+        tags = JSON.stringify(tags);
+    } else if (!tags) {
+        tags = "[]";
+    }
+
+    return {
+        id,
+        ...val,
+        tags,
+        views: val.views || 0,
+        createdAt: val.createdAt ? new Date(val.createdAt) : new Date(),
+        updatedAt: val.updatedAt ? new Date(val.updatedAt) : new Date(),
+    } as Article;
+}
+
+export async function getPublishedArticles() {
+    const articles = await getArticles();
+    return articles
+        .filter(a => a.published)
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+}
+
+export async function getFeaturedArticles() {
+    const articles = await getArticles();
+    return articles
+        .filter(a => a.published && a.featured)
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+}
+
+export async function createArticleDB(data: Omit<Article, 'id'>) {
+    const payload = sanitizeForDB({
+        ...data,
+        views: 0,
+    });
+    return db.ref("articles").push(payload);
+}
+
+export async function updateArticleDB(id: string, data: Partial<Article>) {
+    await db.ref(`articles/${id}`).update(sanitizeForDB(data));
+}
+
+export async function deleteArticleDB(id: string) {
+    await db.ref(`articles/${id}`).remove();
+}
+
+export async function incrementArticleViews(id: string) {
+    const article = await getArticle(id);
+    if (article) {
+        await db.ref(`articles/${id}`).update({
+            views: (article.views || 0) + 1
+        });
+    }
+}
+
+// --- Analytics ---
+
+export interface PageView {
+    id: string;
+    page: string;
+    referrer: string;
+    userAgent: string;
+    timestamp: Date;
+    sessionId: string;
+}
+
+export interface AnalyticsEvent {
+    id: string;
+    type: string;
+    page: string;
+    data: Record<string, any>;
+    timestamp: Date;
+    sessionId: string;
+}
+
+export interface DailyStats {
+    date: string;
+    views: number;
+    uniqueVisitors: number;
+    events: number;
+}
+
+export async function trackPageView(data: Omit<PageView, 'id'>) {
+    const payload = {
+        ...data,
+        timestamp: data.timestamp.toISOString()
+    };
+    return db.ref("analytics/pageViews").push(payload);
+}
+
+export async function trackEvent(data: Omit<AnalyticsEvent, 'id'>) {
+    const payload = {
+        ...data,
+        timestamp: data.timestamp.toISOString()
+    };
+    return db.ref("analytics/events").push(payload);
+}
+
+export async function getPageViews(days: number = 30) {
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - days);
+
+    const snapshot = await db.ref("analytics/pageViews")
+        .orderByChild("timestamp")
+        .startAt(startDate.toISOString())
+        .once("value");
+
+    const data = snapshot.val();
+    if (!data) return [];
+
+    return Object.entries(data).map(([id, val]: [string, any]) => ({
+        id,
+        ...val,
+        timestamp: new Date(val.timestamp)
+    })) as PageView[];
+}
+
+export async function getAnalyticsEvents(days: number = 30) {
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - days);
+
+    const snapshot = await db.ref("analytics/events")
+        .orderByChild("timestamp")
+        .startAt(startDate.toISOString())
+        .once("value");
+
+    const data = snapshot.val();
+    if (!data) return [];
+
+    return Object.entries(data).map(([id, val]: [string, any]) => ({
+        id,
+        ...val,
+        timestamp: new Date(val.timestamp)
+    })) as AnalyticsEvent[];
+}
+
+export async function getDailyStats(days: number = 30): Promise<DailyStats[]> {
+    const pageViews = await getPageViews(days);
+    const events = await getAnalyticsEvents(days);
+
+    const statsMap: Record<string, DailyStats> = {};
+
+    // Initialize days
+    for (let i = 0; i < days; i++) {
+        const date = new Date();
+        date.setDate(date.getDate() - i);
+        const dateStr = date.toISOString().split('T')[0];
+        statsMap[dateStr] = {
+            date: dateStr,
+            views: 0,
+            uniqueVisitors: 0,
+            events: 0
+        };
+    }
+
+    // Count page views and unique visitors
+    const visitorsByDay: Record<string, Set<string>> = {};
+
+    pageViews.forEach(pv => {
+        const dateStr = pv.timestamp.toISOString().split('T')[0];
+        if (statsMap[dateStr]) {
+            statsMap[dateStr].views++;
+            if (!visitorsByDay[dateStr]) {
+                visitorsByDay[dateStr] = new Set();
+            }
+            visitorsByDay[dateStr].add(pv.sessionId);
+        }
+    });
+
+    // Set unique visitors
+    Object.entries(visitorsByDay).forEach(([date, visitors]) => {
+        if (statsMap[date]) {
+            statsMap[date].uniqueVisitors = visitors.size;
+        }
+    });
+
+    // Count events
+    events.forEach(ev => {
+        const dateStr = ev.timestamp.toISOString().split('T')[0];
+        if (statsMap[dateStr]) {
+            statsMap[dateStr].events++;
+        }
+    });
+
+    return Object.values(statsMap).sort((a, b) => a.date.localeCompare(b.date));
+}
+
+export async function getTopPages(days: number = 30): Promise<{ page: string; views: number; uniqueVisitors: number }[]> {
+    const pageViews = await getPageViews(days);
+
+    const pageStats: Record<string, { views: number; sessions: Set<string> }> = {};
+    pageViews.forEach(pv => {
+        if (!pageStats[pv.page]) {
+            pageStats[pv.page] = { views: 0, sessions: new Set() };
+        }
+        pageStats[pv.page].views += 1;
+        pageStats[pv.page].sessions.add(pv.sessionId);
+    });
+
+    return Object.entries(pageStats)
+        .map(([page, stats]) => ({
+            page,
+            views: stats.views,
+            uniqueVisitors: stats.sessions.size
+        }))
+        .sort((a, b) => b.views - a.views)
+        .slice(0, 10);
+}
+
+export async function getTotalStats(days: number = 30) {
+    const pageViews = await getPageViews(days);
+    const events = await getAnalyticsEvents(days);
+
+    const uniqueVisitors = new Set(pageViews.map(pv => pv.sessionId)).size;
+
+    return {
+        totalViews: pageViews.length,
+        uniqueVisitors,
+        totalEvents: events.length,
+        avgViewsPerVisitor: uniqueVisitors > 0 ? Math.round(pageViews.length / uniqueVisitors * 10) / 10 : 0
+    };
 }

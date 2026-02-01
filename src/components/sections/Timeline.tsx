@@ -61,7 +61,7 @@ export default function Timeline({ experiences = [] }: TimelineProps) {
     <section id="experience" className="section relative overflow-hidden bg-surface/30">
       {/* Background decoration */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-primary/30 to-transparent" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-linear-to-b from-transparent via-primary/30 to-transparent" />
       </div>
 
       <div className="max-w-5xl mx-auto">
@@ -145,7 +145,7 @@ export default function Timeline({ experiences = [] }: TimelineProps) {
                         )}
                       </motion.div>
                       <span className="text-xs font-semibold px-3 py-1 rounded-full bg-primary/20 text-primary">
-                        {type === "work" ? "Expérience" : "Formation"}
+                        {type === "work" ? t("work") : t("education")}
                       </span>
                     </div>
 
@@ -185,7 +185,7 @@ export default function Timeline({ experiences = [] }: TimelineProps) {
                 </motion.div>
               )
             }) : (
-              <div className="text-center py-10 text-muted-foreground">Aucune expérience ajoutée.</div>
+              <div className="text-center py-10 text-muted-foreground">{t("noExperience")}</div>
             )}
           </div>
         </motion.div>

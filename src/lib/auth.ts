@@ -19,6 +19,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     const adminEmail = process.env.ADMIN_EMAIL;
                     const adminPassword = process.env.ADMIN_PASSWORD;
 
+                    // Debug logs (retirez en production)
+                    console.log("Login attempt:", { email, password });
+                    console.log("Expected:", { adminEmail, adminPassword });
+
                     if (email === adminEmail && password === adminPassword) {
                         return {
                             id: "1",

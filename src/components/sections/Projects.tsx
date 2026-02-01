@@ -111,6 +111,7 @@ export default function Projects({ projects = [] }: ProjectsProps) {
                         alt={project.title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     )}
                     {/* Overlay */}
@@ -178,7 +179,7 @@ export default function Projects({ projects = [] }: ProjectsProps) {
                   </div>
                 </motion.div>
               )) : (
-                <div className="col-span-full text-center text-muted-foreground py-10">Aucun projet trouvé.</div>
+                <div className="col-span-full text-center text-muted-foreground py-10">{t("noProjects")}</div>
               )}
             </AnimatePresence>
           </motion.div>
