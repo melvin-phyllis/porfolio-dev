@@ -1,4 +1,4 @@
-# 🌟 Portfolio Marie-Danielle Akpeuby
+# 🌟 Portfolio Melvin phyllis
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.1-black?logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev/)
@@ -391,12 +391,11 @@ Ce projet est sous licence **MIT**. Voir le fichier [LICENSE](LICENSE) pour plus
 
 **Marie-Danielle Akpeuby**
 - Portfolio : [zaerthnh.dev](https://zaerthnh.dev)
-- GitHub : [@zaerthnh](https://github.com/zaerthnh)
-- LinkedIn : [Marie-Danielle Akpeuby](https://linkedin.com/in/zaerthnh)
+- GitHub : [@Melvin-phyllis](https://github.com/zaerthnh)
+- LinkedIn : [Akou Melvin](https://linkedin.com/in/zaerthnh)
 
 ---
 
 <div align="center">
-  <p>Fait avec ❤️ et ☕ en utilisant Next.js, React & Tailwind CSS</p>
   <p>⭐ N'hésitez pas à mettre une étoile si ce projet vous a été utile !</p>
 </div>
