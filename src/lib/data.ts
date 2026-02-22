@@ -120,7 +120,7 @@ export const projects = [
     technologies: ["React 19", "Firebase", "Zustand", "SWR", "Tailwind CSS 4", "DaisyUI"],
     category: "fullstack",
     github: "https://github.com/melvin-phyllis/ustream-movies",
-    demo: "",
+    demo: "https://u-stream.netlify.app/",
   },
   {
     id: 2,
@@ -131,7 +131,7 @@ export const projects = [
     technologies: ["HTML5", "CSS3", "JavaScript ES6+", "API TMDB"],
     category: "frontend",
     github: "https://github.com/melvin-phyllis/cinevault",
-    demo: "",
+    demo: "https://melvin-phyllis.github.io/CineVault/",
   },
   {
     id: 3,
@@ -142,7 +142,7 @@ export const projects = [
     technologies: ["Next.js 16", "React 19", "TypeScript", "Firebase", "Zustand", "Tailwind CSS 4"],
     category: "fullstack",
     github: "https://github.com/melvin-phyllis/realtime-taskflow",
-    demo: "",
+    demo: "https://realtime-taskflow.vercel.app/",
   },
   {
     id: 4,
@@ -153,7 +153,7 @@ export const projects = [
     technologies: ["PHP", "Laravel", "Tailwind CSS", "Blade", "Reverb", "Pusher"],
     category: "fullstack",
     github: "https://github.com/melvin-phyllis/managex",
-    demo: "",
+    demo: "https://ya-consulting.com/managex/public/",
   },
   {
     id: 5,
@@ -164,7 +164,7 @@ export const projects = [
     technologies: ["Next.js 16", "React 19", "TypeScript", "Firebase", "Tailwind CSS 4", "DaisyUI", "ImageKit", "Zustand"],
     category: "fullstack",
     github: "https://github.com/melvin-phyllis/boutiqueenligne",
-    demo: "",
+    demo: "https://boutique-en-ligne-chi.vercel.app/",
   },
 ];
 

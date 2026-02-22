@@ -86,7 +86,7 @@ export default function About({ profile, stats }: AboutProps) {
               </p>
 
               <div className="flex flex-wrap gap-3">
-                {["React", "Next.js", "Node.js", "Docker", "Python"].map((tech) => (
+                {["React", "Next.js", "Node.js", "Docker", "Laravel"].map((tech) => (
                   <motion.span
                     key={tech}
                     whileHover={{ scale: 1.1, y: -2 }}

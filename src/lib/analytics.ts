@@ -18,9 +18,40 @@ interface EventProperties {
     [key: string]: string | number | boolean | undefined;
 }
 
+function generateSessionId(): string {
+    if (typeof window === "undefined") return "";
+
+    let sessionId = sessionStorage.getItem("analytics_session_id");
+    if (!sessionId) {
+        sessionId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        sessionStorage.setItem("analytics_session_id", sessionId);
+    }
+    return sessionId;
+}
+
 export function trackEvent(eventName: EventName, properties?: EventProperties) {
     try {
+        // 1. Track with Vercel Analytics
         track(eventName, properties);
+
+        // 2. Track with custom Firebase DB
+        if (typeof window !== "undefined") {
+            const sessionId = generateSessionId();
+            if (sessionId) {
+                fetch("/api/analytics/event", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        type: eventName,
+                        page: window.location.pathname,
+                        data: properties || {},
+                        sessionId,
+                    }),
+                }).catch(() => { });
+            }
+        }
     } catch (error) {
         console.error("Failed to track event:", error);
     }

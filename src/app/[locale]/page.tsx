@@ -24,11 +24,11 @@ export async function generateMetadata({
 
     return {
         title: locale === "fr"
-            ? "Accueil | Développeur Fullstack"
-            : "Home | Fullstack Developer",
+            ? "Melvin Akou | Développeur Web JS/PHP Full-Stack Junior — Portfolio"
+            : "Melvin Akou | Junior Full-Stack JS/PHP Web Developer — Portfolio",
         description: locale === "fr"
-            ? "Découvrez le portfolio de Akou N'dy Phyllis Melvin, développeur web JS/PHP full-stack junior. Expertise en React, Next.js, Node.js, PHP, Laravel et Firebase."
-            : "Discover Akou N'dy Phyllis Melvin's portfolio, junior full-stack web developer. Expertise in React, Next.js, Node.js, PHP, Laravel and Firebase.",
+            ? "Portfolio de Melvin Akou (Melvyn), développeur web JavaScript & PHP full-stack junior basé à Abidjan, Côte d'Ivoire. Projets React, Next.js, Node.js, Laravel, Firebase. Création d'applications web modernes et performantes."
+            : "Melvin Akou's (Melvyn) portfolio — Junior full-stack JS/PHP web developer based in Abidjan, Côte d'Ivoire. React, Next.js, Node.js, Laravel, Firebase projects. Building modern, high-performance web applications.",
         alternates: {
             canonical: `${baseUrl}/${locale}`,
             languages: {
@@ -39,6 +39,12 @@ export async function generateMetadata({
         openGraph: {
             url: `${baseUrl}/${locale}`,
             locale: locale === "fr" ? "fr_FR" : "en_US",
+            title: locale === "fr"
+                ? "Melvin Akou — Développeur Web Full-Stack | React, Next.js, Laravel"
+                : "Melvin Akou — Full-Stack Web Developer | React, Next.js, Laravel",
+            description: locale === "fr"
+                ? "Découvrez les projets et compétences de Melvin Akou, développeur web JS/PHP full-stack junior spécialisé en React, Next.js, Laravel et Firebase."
+                : "Explore the projects and skills of Melvin Akou, a junior full-stack JS/PHP web developer specializing in React, Next.js, Laravel, and Firebase.",
         },
     };
 }

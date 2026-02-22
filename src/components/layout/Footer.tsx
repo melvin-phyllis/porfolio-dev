@@ -33,7 +33,7 @@ export default function Footer() {
               className="text-3xl font-bold gradient-text"
               whileHover={{ scale: 1.05 }}
             >
-              MD
+              AKL
             </motion.a>
             <p className="mt-2 text-text-muted text-sm">
               {personalInfo.title}

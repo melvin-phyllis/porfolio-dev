@@ -37,12 +37,12 @@ export default async function LocaleLayout({
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zaerthnh.dev";
 
     const siteName = locale === "fr"
-        ? "Akou N'dy Phyllis Melvin - Portfolio"
-        : "Akou N'dy Phyllis Melvin - Portfolio";
+        ? "Melvin Akou — Développeur Web Full-Stack"
+        : "Melvin Akou — Full-Stack Web Developer";
 
     const siteDescription = locale === "fr"
-        ? "Portfolio de Akou N'dy Phyllis Melvin - Développeur Web JS/PHP Full-Stack Junior"
-        : "Akou N'dy Phyllis Melvin's Portfolio - Junior Full-Stack Web Developer";
+        ? "Portfolio de Melvin Akou (Melvyn) — Développeur Web JS/PHP Full-Stack Junior, Abidjan, Côte d'Ivoire"
+        : "Melvin Akou's (Melvyn) Portfolio — Junior Full-Stack JS/PHP Web Developer, Abidjan, Côte d'Ivoire";
 
     return (
         <>
@@ -52,14 +52,33 @@ export default async function LocaleLayout({
                 description={siteDescription}
             />
             <PersonSchema
-                name="Akou N'dy Phyllis Melvin"
+                name="Melvin Akou"
+                alternateName={[
+                    "Akou N'dy Phyllis Melvin",
+                    "Melvyn Akou",
+                    "Akou Melvin",
+                    "Akou Melvyn",
+                    "Melvin Phyllis",
+                    "melvin-phyllis",
+                    "Melvin Dev",
+                ]}
                 jobTitle="Développeur Web JS/PHP Full-Stack Junior"
-                description={profile?.about || "Développeur Web JS/PHP Full-Stack Junior spécialisé en React, Next.js, Node.js, PHP, Laravel et Firebase."}
+                description={profile?.about || "Développeur Web JS/PHP Full-Stack Junior spécialisé en React, Next.js, Node.js, PHP, Laravel et Firebase. Basé à Abidjan, Côte d'Ivoire."}
                 image={profile?.image || `${baseUrl}/images/profile.svg`}
                 url={`${baseUrl}/${locale}`}
                 sameAs={[
                     profile?.github || "https://github.com/melvin-phyllis",
                     profile?.linkedin || "https://www.linkedin.com/in/melvin-akou/",
+                ]}
+                knowsAbout={[
+                    "JavaScript", "TypeScript", "PHP",
+                    "React", "Next.js", "Node.js", "Laravel",
+                    "Firebase", "MongoDB", "MySQL",
+                    "Tailwind CSS", "Docker", "Git",
+                    "REST API", "Zustand", "Prisma",
+                    "Développement web full-stack",
+                    "Applications web modernes",
+                    "E-commerce",
                 ]}
                 worksFor={{
                     name: "Ya Consulting",

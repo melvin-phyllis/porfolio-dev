@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { trackCVDownload } from "@/lib/analytics";
 import { ArrowDown, Send, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { fadeInLeft, fadeInRight, staggerContainer } from "@/lib/animations";
@@ -103,7 +104,7 @@ export default function Hero({ profile }: HeroProps) {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
               </span>
-              {t("greeting")}
+              Disponible pour un stage
             </motion.div>
 
             <motion.h1
@@ -153,6 +154,7 @@ export default function Hero({ profile }: HeroProps) {
                 href="/cv-melvin-phyllis.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackCVDownload()}
                 className="px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300"
                 style={{
                   background: "linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)",
@@ -170,7 +172,7 @@ export default function Hero({ profile }: HeroProps) {
                 onClick={() => scrollToSection("contact")}
                 className="px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300"
                 style={{
-                  background: "transparent",
+                  background: "rgba(0,0,0,0)",
                   border: "1px solid rgba(245,158,11,0.4)",
                   color: "var(--gold-light)"
                 }}

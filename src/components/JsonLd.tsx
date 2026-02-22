@@ -13,6 +13,8 @@ interface PersonSchemaProps {
         name: string;
         url?: string;
     };
+    alternateName?: string[];
+    knowsAbout?: string[];
 }
 
 export function PersonSchema({
@@ -23,16 +25,30 @@ export function PersonSchema({
     url,
     sameAs,
     worksFor,
+    alternateName,
+    knowsAbout,
 }: PersonSchemaProps) {
     const schema = {
         "@context": "https://schema.org",
         "@type": "Person",
         name,
+        ...(alternateName && { alternateName }),
         jobTitle,
         description,
         image,
         url,
         sameAs,
+        ...(knowsAbout && { knowsAbout }),
+        nationality: {
+            "@type": "Country",
+            name: "Côte d'Ivoire",
+        },
+        address: {
+            "@type": "PostalAddress",
+            addressLocality: "Abidjan",
+            addressCountry: "CI",
+        },
+        knowsLanguage: ["fr", "en"],
         ...(worksFor && {
             worksFor: {
                 "@type": "Organization",

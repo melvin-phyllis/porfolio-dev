@@ -88,7 +88,7 @@ export default function Navbar() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              MD
+              AKL
             </motion.a>
 
             {/* Desktop Navigation */}

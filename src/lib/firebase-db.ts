@@ -350,6 +350,11 @@ export interface PageView {
     page: string;
     referrer: string;
     userAgent: string;
+    device?: string;
+    os?: string;
+    country?: string;
+    city?: string;
+    duration?: number;
     timestamp: Date;
     sessionId: string;
 }
@@ -375,7 +380,12 @@ export async function trackPageView(data: Omit<PageView, 'id'>) {
         ...data,
         timestamp: data.timestamp.toISOString()
     };
-    return db.ref("analytics/pageViews").push(payload);
+    const ref = await db.ref("analytics/pageViews").push(payload);
+    return ref.key;
+}
+
+export async function updatePageViewDuration(id: string, duration: number) {
+    return db.ref(`analytics/pageViews/${id}`).update({ duration });
 }
 
 export async function trackEvent(data: Omit<AnalyticsEvent, 'id'>) {

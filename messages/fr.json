@@ -12,7 +12,6 @@
     "contact": "Contact"
   },
   "hero": {
-    "greeting": "Bonjour, je suis",
     "name": "Akou N'dy Phyllis Melvin",
     "title": "Développeur Web JS/PHP Full-Stack Junior",
     "subtitle": "Je transforme des idées en projets concrets avec React, Next.js et Firebase",

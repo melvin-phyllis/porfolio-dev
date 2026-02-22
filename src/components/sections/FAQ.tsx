@@ -25,7 +25,8 @@ function FAQAccordion({ item, index, isOpen, toggle }: {
       <motion.button
         onClick={toggle}
         className="w-full p-6 flex items-center justify-between text-left"
-        whileHover={{ backgroundColor: "rgba(99, 102, 241, 0.05)" }}
+        style={{ backgroundColor: "rgba(0,0,0,0)" }}
+        whileHover={{ backgroundColor: "rgba(245,158,11,0.05)" }}
       >
         <div className="flex items-center gap-4">
           <div className="p-2 rounded-lg bg-primary/10">

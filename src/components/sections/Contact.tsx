@@ -7,6 +7,7 @@ import { Send, Mail, Phone, MapPin, Loader2, CheckCircle, AlertCircle } from "lu
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from "@/lib/animations";
 import { personalInfo } from "@/lib/data";
 import { sendContactEmail } from "@/app/actions";
+import { trackSocialLinkClick } from "@/lib/analytics";
 
 interface ContactProps {
   profile?: {
@@ -139,15 +140,22 @@ export default function Contact({ profile }: ContactProps) {
               <div className="p-6 rounded-2xl bg-primary/5 border border-border">
                 <p className="text-text-muted mb-4">{t("social")}</p>
                 <div className="flex gap-4">
-                  {["GitHub", "LinkedIn", "Twitter"].map((social) => (
-                    <motion.div
-                      key={social}
-                      whileHover={{ y: -5 }}
-                      className="px-4 py-2 rounded-lg bg-surface text-sm font-medium text-text-muted hover:text-primary transition-colors cursor-pointer"
-                    >
-                      {social}
-                    </motion.div>
-                  ))}
+                  {["GitHub", "LinkedIn"].map((social) => {
+                    const url = social === "GitHub" ? personalInfo.github : personalInfo.linkedin;
+                    return (
+                      <motion.a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        key={social}
+                        onClick={() => trackSocialLinkClick(social, url)}
+                        whileHover={{ y: -5 }}
+                        className="px-4 py-2 rounded-lg bg-surface text-sm font-medium text-text-muted hover:text-primary transition-colors cursor-pointer block"
+                      >
+                        {social}
+                      </motion.a>
+                    )
+                  })}
                 </div>
               </div>
             </motion.div>

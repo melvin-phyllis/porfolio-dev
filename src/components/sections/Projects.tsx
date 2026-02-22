@@ -5,8 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
-import { ExternalLink, Github, FolderCode } from "lucide-react";
+import { ExternalLink, Github, FolderCode, Eye } from "lucide-react";
 import { fadeInUp, staggerContainer, scaleIn } from "@/lib/animations";
+import { trackProjectGithubClick, trackProjectDemoClick, trackProjectClick } from "@/lib/analytics";
+import ProjectModal from "@/components/sections/ProjectModal";
 
 import { Project } from "@prisma/client";
 
@@ -17,6 +19,7 @@ interface ProjectsProps {
 export default function Projects({ projects = [] }: ProjectsProps) {
   const t = useTranslations("projects");
   const [activeFilter, setActiveFilter] = useState("all");
+  const [selectedProject, setSelectedProject] = useState<any | null>(null);
 
   // Dynamically generate filters from projects + standard ones
   // For now keep standard filters but ensure logic works
@@ -105,7 +108,11 @@ export default function Projects({ projects = [] }: ProjectsProps) {
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
-                  className="group relative rounded-2xl overflow-hidden bg-surface border border-border transition-all duration-500"
+                  className="group relative rounded-2xl overflow-hidden bg-surface border border-border transition-all duration-500 cursor-pointer"
+                  onClick={() => {
+                    setSelectedProject(project);
+                    trackProjectClick(project.id, project.title);
+                  }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLElement).style.borderColor = "rgba(245,158,11,0.5)";
                     (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 30px var(--gold-glow)";
@@ -166,13 +173,17 @@ export default function Projects({ projects = [] }: ProjectsProps) {
                       ))}
                     </div>
 
-                    {/* Links */}
+                    {/* Liens + Voir détails */}
                     <div className="flex items-center gap-3">
                       {project.github && (
                         <motion.a
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            trackProjectGithubClick(project.id, project.title, project.github);
+                          }}
                           className="flex items-center gap-2 px-4 py-2 rounded-lg bg-background hover:bg-primary/10 text-text-muted hover:text-primary transition-all duration-300"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
@@ -181,11 +192,15 @@ export default function Projects({ projects = [] }: ProjectsProps) {
                           <span className="text-sm">{t("viewCode")}</span>
                         </motion.a>
                       )}
-                      {project.demo && (
+                      {project.link && (
                         <motion.a
-                          href={project.demo}
+                          href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            trackProjectDemoClick(project.id, project.title, project.link);
+                          }}
                           className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary transition-all duration-300"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
@@ -209,6 +224,13 @@ export default function Projects({ projects = [] }: ProjectsProps) {
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Modale de détail */}
+      <ProjectModal
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   );
 }
