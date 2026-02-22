@@ -79,18 +79,19 @@ export default function Timeline({ experiences = [] }: TimelineProps) {
             <p className="text-text-muted text-lg max-w-2xl mx-auto">
               {t("subtitle")}
             </p>
-            <div className="w-24 h-1 mx-auto mt-4 rounded-full bg-primary" />
+            <div className="w-24 h-1 mx-auto mt-4 rounded-full animated-gradient" />
           </motion.div>
 
           {/* Timeline */}
           <div className="relative">
-            {/* Center Line - Animated */}
+            {/* Center Line - Gold Animated */}
             <motion.div
               initial={{ scaleY: 0 }}
               whileInView={{ scaleY: 1 }}
               viewport={{ once: false }}
               transition={{ duration: 1.5, ease: "easeOut" }}
-              className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary/50 origin-top"
+              className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 origin-top"
+              style={{ background: "linear-gradient(to bottom, transparent, var(--gold), var(--gold-light), var(--gold), transparent)" }}
             />
 
             {experiences && experiences.length > 0 ? experiences.map((exp, index) => {
@@ -118,7 +119,11 @@ export default function Timeline({ experiences = [] }: TimelineProps) {
                     whileInView="visible"
                     viewport={{ once: false }}
                     whileHover={{ scale: 1.3 }}
-                    className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background z-10 shadow-lg shadow-primary/50"
+                    className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-4 border-background z-10"
+                    style={{
+                      background: "var(--gold)",
+                      boxShadow: "0 0 12px var(--gold-glow), 0 0 24px rgba(245,158,11,0.1)"
+                    }}
                   />
 
                   {/* Content Card */}
@@ -136,28 +141,30 @@ export default function Timeline({ experiences = [] }: TimelineProps) {
                         whileInView={{ rotate: 0, opacity: 1 }}
                         viewport={{ once: false }}
                         transition={{ delay: index * 0.3 + 0.2, duration: 0.5 }}
-                        className="p-2 rounded-lg bg-primary/20"
+                        className="p-2 rounded-lg"
+                        style={{ background: "rgba(245,158,11,0.15)" }}
                       >
                         {type === "work" ? (
-                          <Briefcase className="w-4 h-4 text-primary" />
+                          <Briefcase className="w-4 h-4" style={{ color: "var(--gold)" }} />
                         ) : (
-                          <GraduationCap className="w-4 h-4 text-primary" />
+                          <GraduationCap className="w-4 h-4" style={{ color: "var(--gold)" }} />
                         )}
                       </motion.div>
-                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-primary/20 text-primary">
+                      <span className="text-xs font-semibold px-3 py-1 rounded-full"
+                        style={{ background: "rgba(245,158,11,0.12)", color: "var(--gold)" }}>
                         {type === "work" ? t("work") : t("education")}
                       </span>
                     </div>
 
                     {/* Title & Company */}
                     <h3 className="text-xl font-bold text-white mb-1">{exp.role}</h3>
-                    <p className="text-primary font-semibold mb-2">{exp.company}</p>
+                    <p className="font-semibold mb-2" style={{ color: "var(--gold)" }}>{exp.company}</p>
 
                     {/* Meta Info */}
                     <div className={`flex flex-wrap gap-3 mb-4 text-sm text-text-muted ${index % 2 === 0 ? "md:justify-end" : "justify-start"
                       }`}>
                       <span className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4 text-primary" />
+                        <Calendar className="w-4 h-4" style={{ color: "var(--gold)" }} />
                         {exp.date}
                       </span>
                       {/* Location not in DB standard schema yet, omitted or default */}
@@ -172,9 +179,9 @@ export default function Timeline({ experiences = [] }: TimelineProps) {
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: false }}
                           transition={{ delay: index * 0.3 + 0.3 + i * 0.1, duration: 0.4 }}
-                          className="text-text-muted text-sm flex items-start gap-2"
+                          className="text-sm flex items-start gap-2"
                         >
-                          <span className={`text-primary mt-1 ${index % 2 === 0 ? "md:order-last" : ""}`}>
+                          <span className={`mt-1 ${index % 2 === 0 ? "md:order-last" : ""}`} style={{ color: "var(--gold)" }}>
                             ●
                           </span>
                           <span>{item}</span>

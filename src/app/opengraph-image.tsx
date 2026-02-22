@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "Marie Danielle Akpeuby - Développeuse Fullstack & DevOps";
+export const alt = "Akou N'dy Phyllis Melvin - Développeur Web JS/PHP Full-Stack Junior";
 export const size = {
     width: 1200,
     height: 630,
@@ -58,7 +58,7 @@ export default async function Image() {
                         marginBottom: "16px",
                     }}
                 >
-                    Marie Danielle Akpeuby
+                    Akou N'dy Phyllis Melvin
                 </h1>
                 <p
                     style={{
@@ -68,7 +68,7 @@ export default async function Image() {
                         marginBottom: "32px",
                     }}
                 >
-                    Développeuse Fullstack & DevOps
+                    Développeur Web JS/PHP Full-Stack Junior
                 </p>
                 <div
                     style={{
@@ -85,8 +85,6 @@ export default async function Image() {
                     <span>Node.js</span>
                     <span>•</span>
                     <span>Docker</span>
-                    <span>•</span>
-                    <span>Kubernetes</span>
                 </div>
             </div>
         ),

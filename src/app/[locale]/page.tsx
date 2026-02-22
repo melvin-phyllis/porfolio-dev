@@ -21,14 +21,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
     const { locale } = await params;
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zaerthnh.dev";
-    
+
     return {
-        title: locale === "fr" 
-            ? "Accueil | Développeuse Fullstack & DevOps"
-            : "Home | Fullstack Developer & DevOps",
+        title: locale === "fr"
+            ? "Accueil | Développeur Fullstack"
+            : "Home | Fullstack Developer",
         description: locale === "fr"
-            ? "Découvrez le portfolio de Marie Danielle Akpeuby, développeuse fullstack & DevOps. Expertise en React, Next.js, Node.js, Docker et Kubernetes."
-            : "Discover Marie Danielle Akpeuby's portfolio, fullstack developer & DevOps. Expertise in React, Next.js, Node.js, Docker and Kubernetes.",
+            ? "Découvrez le portfolio de Akou N'dy Phyllis Melvin, développeur web JS/PHP full-stack junior. Expertise en React, Next.js, Node.js, PHP, Laravel et Firebase."
+            : "Discover Akou N'dy Phyllis Melvin's portfolio, junior full-stack web developer. Expertise in React, Next.js, Node.js, PHP, Laravel and Firebase.",
         alternates: {
             canonical: `${baseUrl}/${locale}`,
             languages: {
@@ -60,12 +60,12 @@ export default async function Home({
     ]);
 
     // Traduire automatiquement si la locale est anglais
-    const profile = rawProfile 
+    const profile = rawProfile
         ? await translateObject<Profile>(
             rawProfile,
             ["headline", "subheadline", "about"],
             locale
-          )
+        )
         : rawProfile;
 
     const translatedProjects = await translateArray<Project>(
@@ -82,8 +82,7 @@ export default async function Home({
 
     const projects = translatedProjects
         .filter((p) => p.featured)
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-        .slice(0, 3);
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
     const experiences = translatedExperiences.sort(
         (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -100,9 +99,7 @@ export default async function Home({
             <About
                 profile={profile}
                 stats={[
-                    { value: experiences.length, label: "experience" },
                     { value: projects.length, label: "projects" },
-                    { value: 10, label: "clients" },
                     { value: skills.length, label: "technologies" },
                 ]}
             />

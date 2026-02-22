@@ -11,8 +11,8 @@ export async function generateMetadata({
         title: locale === "fr" ? "Blog" : "Blog",
         description:
             locale === "fr"
-                ? "Découvrez mes articles sur le développement web, React, Next.js, Node.js et le DevOps."
-                : "Discover my articles about web development, React, Next.js, Node.js and DevOps.",
+                ? "Découvrez mes articles sur le développement web, React, Next.js, Node.js et Laravel."
+                : "Discover my articles about web development, React, Next.js, Node.js and Laravel.",
     };
 }
 

@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
 
+// Duplicate manifest for localized routes (/fr, /en)
+// to avoid 404 on /fr/manifest.webmanifest
 export default function manifest(): MetadataRoute.Manifest {
     return {
         name: "Akou N'dy Phyllis Melvin - Développeur Web JS/PHP Full-Stack Junior",
@@ -8,8 +10,8 @@ export default function manifest(): MetadataRoute.Manifest {
             "Portfolio de Akou N'dy Phyllis Melvin - Développeur Web JS/PHP Full-Stack Junior spécialisé en React, Next.js, Node.js, PHP, Laravel et Firebase.",
         start_url: "/",
         display: "standalone",
-        background_color: "#ffffff",
-        theme_color: "#000000",
+        background_color: "#000000",
+        theme_color: "#f59e0b",
         icons: [
             {
                 src: "/favicon.ico",

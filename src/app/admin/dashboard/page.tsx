@@ -66,8 +66,7 @@ const mockStats: DashboardStats = {
 const mockActivities: RecentActivity[] = [
     { id: "1", type: "project", title: "E-commerce Platform", action: "Créé", date: "2025-01-30" },
     { id: "2", type: "article", title: "Introduction à Next.js 15", action: "Publié", date: "2025-01-28" },
-    { id: "3", type: "skill", title: "Kubernetes", action: "Ajouté", date: "2025-01-25" },
-    { id: "4", type: "experience", title: "Développeuse Fullstack", action: "Modifié", date: "2025-01-20" },
+    { id: "3", type: "experience", title: "Développeuse Fullstack", action: "Modifié", date: "2025-01-20" },
 ];
 
 // Stats cards config

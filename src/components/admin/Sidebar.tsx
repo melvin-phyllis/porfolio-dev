@@ -1,249 +1,207 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+    LayoutDashboard, User, FolderOpen, Code2, Clock, MessageSquare,
+    Settings, ChevronLeft, ChevronRight, BarChart3, HelpCircle, Star, Wrench, LogOut
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { signOut } from "next-auth/react";
-import {
-    LayoutDashboard,
-    FolderOpen,
-    Code2,
-    Briefcase,
-    Settings,
-    LogOut,
-    FileText,
-    BarChart3,
-    ChevronLeft,
-    ChevronRight,
-    ExternalLink,
-    X,
-} from "lucide-react";
 
 const navItems = [
-    {
-        href: "/admin/dashboard",
-        label: "Dashboard",
-        icon: LayoutDashboard,
-    },
-    {
-        href: "/admin/dashboard/projects",
-        label: "Projets",
-        icon: FolderOpen,
-    },
-    {
-        href: "/admin/dashboard/articles",
-        label: "Articles",
-        icon: FileText,
-    },
-    {
-        href: "/admin/dashboard/skills",
-        label: "Compétences",
-        icon: Code2,
-    },
-    {
-        href: "/admin/dashboard/experiences",
-        label: "Expériences",
-        icon: Briefcase,
-    },
-    {
-        href: "/admin/dashboard/analytics",
-        label: "Analytics",
-        icon: BarChart3,
-    },
-    {
-        href: "/admin/dashboard/settings",
-        label: "Paramètres",
-        icon: Settings,
-    },
+    { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/admin/dashboard/projects", label: "Projets", icon: FolderOpen },
+    { href: "/admin/dashboard/skills", label: "Compétences", icon: Code2 },
+    { href: "/admin/dashboard/experiences", label: "Expérience", icon: Clock },
+    { href: "/admin/dashboard/articles", label: "Articles", icon: MessageSquare },
+    { href: "/admin/dashboard/analytics", label: "Analytiques", icon: BarChart3 },
+    { href: "/admin/dashboard/settings", label: "Paramètres", icon: Settings },
 ];
 
 interface SidebarProps {
-    collapsed?: boolean;
-    onCollapse?: (collapsed: boolean) => void;
+    collapsed: boolean;
+    onCollapse: (v: boolean) => void;
     mobileOpen?: boolean;
     onMobileClose?: () => void;
 }
 
-export function Sidebar({ collapsed = false, onCollapse, mobileOpen = false, onMobileClose }: SidebarProps) {
+export function Sidebar({ collapsed, onCollapse, mobileOpen, onMobileClose }: SidebarProps) {
     const pathname = usePathname();
 
-    const toggleCollapse = () => {
-        onCollapse?.(!collapsed);
+    const isActive = (href: string) => {
+        if (href === "/admin/dashboard") return pathname === href;
+        return pathname.startsWith(href);
     };
 
-    const handleNavClick = () => {
-        // Fermer la sidebar mobile après navigation
-        if (onMobileClose) {
-            onMobileClose();
-        }
-    };
-
-    const sidebarContent = (
-        <>
-            {/* Logo / Brand */}
-            <div className="flex h-16 items-center justify-between px-4 border-b border-gray-200 dark:border-gray-800">
-                <AnimatePresence mode="wait">
-                    {!collapsed && (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="flex items-center gap-3"
-                        >
-                            <div className="h-9 w-9 rounded-xl bg-brand-500 flex items-center justify-center">
-                                <span className="text-white font-bold">P</span>
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="font-semibold text-gray-900 dark:text-white text-sm">Portfolio</span>
-                                <span className="text-[10px] text-gray-500 dark:text-gray-400">Admin Panel</span>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-
-                {collapsed && (
-                    <div className="h-9 w-9 rounded-xl bg-brand-500 flex items-center justify-center mx-auto">
-                        <span className="text-white font-bold">P</span>
-                    </div>
-                )}
-
-                {/* Bouton collapse - desktop only */}
-                {!collapsed && (
-                    <button
-                        onClick={toggleCollapse}
-                        className="hidden lg:flex p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+    return (
+        <motion.aside
+            initial={false}
+            animate={{ width: collapsed ? 72 : 260 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className={cn(
+                "fixed top-0 left-0 z-40 h-full flex flex-col overflow-hidden",
+                "border-r",
+            )}
+            style={{
+                background: "#0a0a0a",
+                borderColor: "rgba(245,158,11,0.12)"
+            }}
+        >
+            {/* Logo */}
+            <div
+                className="flex items-center h-16 px-4 border-b shrink-0"
+                style={{ borderColor: "rgba(245,158,11,0.12)" }}
+            >
+                <Link href="/admin/dashboard" className="flex items-center gap-3 overflow-hidden">
+                    <motion.div
+                        className="shrink-0 w-9 h-9 rounded-xl flex items-center justify-center font-bold text-sm"
+                        style={{
+                            background: "linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)",
+                            color: "#000",
+                            boxShadow: "0 0 12px var(--gold-glow)"
+                        }}
                     >
-                        <ChevronLeft className="h-4 w-4" />
-                    </button>
-                )}
-
-                {/* Bouton fermer - mobile only */}
-                {onMobileClose && (
-                    <button
-                        onClick={onMobileClose}
-                        className="lg:hidden p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 transition-colors"
-                    >
-                        <X className="h-5 w-5" />
-                    </button>
-                )}
+                        MP
+                    </motion.div>
+                    <AnimatePresence>
+                        {!collapsed && (
+                            <motion.span
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -10 }}
+                                className="font-semibold text-sm whitespace-nowrap text-white"
+                            >
+                                Admin Panel
+                            </motion.span>
+                        )}
+                    </AnimatePresence>
+                </Link>
             </div>
 
-            {/* Expand button when collapsed - desktop only */}
-            {collapsed && (
-                <div className="hidden lg:block px-3 py-3 border-b border-gray-200 dark:border-gray-800">
-                    <button
-                        onClick={toggleCollapse}
-                        className="w-full p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors flex items-center justify-center"
-                    >
-                        <ChevronRight className="h-4 w-4" />
-                    </button>
-                </div>
-            )}
-
             {/* Navigation */}
-            <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+            <nav className="flex-1 overflow-y-auto py-4 px-2 space-y-1">
                 {navItems.map((item) => {
-                    const Icon = item.icon;
-                    const isActive = pathname === item.href || 
-                        (item.href !== "/admin/dashboard" && pathname.startsWith(`${item.href}/`));
-
+                    const active = isActive(item.href);
                     return (
-                        <Link
-                            key={item.href}
-                            href={item.href}
-                            onClick={handleNavClick}
-                            className={cn(
-                                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
-                                collapsed && "lg:justify-center lg:px-2",
-                                isActive
-                                    ? "bg-brand-500 text-white"
-                                    : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
-                            )}
-                            title={collapsed ? item.label : undefined}
-                        >
-                            <Icon className={cn("h-5 w-5 shrink-0", isActive && "text-white")} />
-                            <span className={cn(collapsed && "lg:hidden")}>{item.label}</span>
+                        <Link key={item.href} href={item.href}>
+                            <motion.div
+                                whileHover={{ x: collapsed ? 0 : 4 }}
+                                className={cn(
+                                    "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 relative",
+                                    collapsed && "justify-center px-2"
+                                )}
+                                style={active ? {
+                                    background: "linear-gradient(135deg, rgba(245,158,11,0.15) 0%, rgba(251,191,36,0.08) 100%)",
+                                    color: "var(--gold-light)",
+                                    borderLeft: "2px solid var(--gold)",
+                                    boxShadow: "inset 0 0 20px rgba(245,158,11,0.05)"
+                                } : {
+                                    color: "#9ca3af"
+                                }}
+                                onMouseEnter={(e) => {
+                                    if (!active) {
+                                        (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)";
+                                        (e.currentTarget as HTMLElement).style.color = "#ffffff";
+                                    }
+                                }}
+                                onMouseLeave={(e) => {
+                                    if (!active) {
+                                        (e.currentTarget as HTMLElement).style.background = "";
+                                        (e.currentTarget as HTMLElement).style.color = "#9ca3af";
+                                    }
+                                }}
+                                title={collapsed ? item.label : undefined}
+                            >
+                                <item.icon
+                                    className={cn("shrink-0", collapsed ? "w-5 h-5" : "w-4 h-4")}
+                                    style={active ? { color: "var(--gold)" } : undefined}
+                                />
+                                <AnimatePresence>
+                                    {!collapsed && (
+                                        <motion.span
+                                            initial={{ opacity: 0, x: -8 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: -8 }}
+                                            className="whitespace-nowrap"
+                                        >
+                                            {item.label}
+                                        </motion.span>
+                                    )}
+                                </AnimatePresence>
+
+                                {/* Active indicator dot */}
+                                {active && collapsed && (
+                                    <span
+                                        className="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-l"
+                                        style={{ background: "var(--gold)" }}
+                                    />
+                                )}
+                            </motion.div>
                         </Link>
                     );
                 })}
             </nav>
 
             {/* Footer */}
-            <div className="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-                {/* View Site Link */}
-                <div className={cn("px-3 py-3 border-b border-gray-200 dark:border-gray-800", collapsed && "lg:px-2")}>
-                    <Link
-                        href="/"
-                        target="_blank"
-                        className={cn(
-                            "flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors",
-                            collapsed && "lg:justify-center lg:px-2"
+            <div className="px-2 py-4 border-t space-y-1" style={{ borderColor: "rgba(245,158,11,0.08)" }}>
+                <button
+                    onClick={() => signOut({ callbackUrl: "/" })}
+                    className={cn(
+                        "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
+                        collapsed && "justify-center px-2"
+                    )}
+                    style={{ color: "#9ca3af" }}
+                    onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.background = "rgba(239,68,68,0.08)";
+                        (e.currentTarget as HTMLElement).style.color = "#f87171";
+                    }}
+                    onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.background = "";
+                        (e.currentTarget as HTMLElement).style.color = "#9ca3af";
+                    }}
+                    title={collapsed ? "Déconnexion" : undefined}
+                >
+                    <LogOut className={cn("shrink-0", collapsed ? "w-5 h-5" : "w-4 h-4")} />
+                    <AnimatePresence>
+                        {!collapsed && (
+                            <motion.span
+                                initial={{ opacity: 0, x: -8 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -8 }}
+                                className="whitespace-nowrap"
+                            >
+                                Déconnexion
+                            </motion.span>
                         )}
-                        title={collapsed ? "Voir le site" : undefined}
-                    >
-                        <ExternalLink className="h-5 w-5 shrink-0" />
-                        <span className={cn(collapsed && "lg:hidden")}>Voir le site</span>
-                    </Link>
-                </div>
-
-                {/* Logout */}
-                <div className={cn("px-3 py-3", collapsed && "lg:px-2")}>
-                    <button
-                        onClick={() => signOut({ callbackUrl: "/admin/login" })}
-                        className={cn(
-                            "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-error-500 dark:text-error-400 hover:text-error-600 dark:hover:text-error-300 hover:bg-error-50 dark:hover:bg-error-500/10 transition-colors",
-                            collapsed && "lg:justify-center lg:px-2"
-                        )}
-                        title={collapsed ? "Déconnexion" : undefined}
-                    >
-                        <LogOut className="h-5 w-5 shrink-0" />
-                        <span className={cn(collapsed && "lg:hidden")}>Déconnexion</span>
-                    </button>
-                </div>
+                    </AnimatePresence>
+                </button>
             </div>
-        </>
-    );
 
-    return (
-        <>
-            {/* Overlay mobile */}
-            <AnimatePresence>
-                {mobileOpen && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onClick={onMobileClose}
-                        className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
-                    />
-                )}
-            </AnimatePresence>
-
-            {/* Sidebar Mobile */}
-            <AnimatePresence>
-                {mobileOpen && (
-                    <motion.aside
-                        initial={{ x: -280 }}
-                        animate={{ x: 0 }}
-                        exit={{ x: -280 }}
-                        transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="fixed left-0 top-0 z-50 h-screen w-[280px] bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col lg:hidden"
-                    >
-                        {sidebarContent}
-                    </motion.aside>
-                )}
-            </AnimatePresence>
-
-            {/* Sidebar Desktop */}
-            <motion.aside
-                initial={false}
-                animate={{ width: collapsed ? 72 : 260 }}
-                transition={{ duration: 0.2, ease: "easeInOut" }}
-                className="hidden lg:flex fixed left-0 top-0 z-40 h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex-col"
+            {/* Toggle Button */}
+            <button
+                onClick={() => onCollapse(!collapsed)}
+                className="absolute -right-3 top-20 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-200 z-50"
+                style={{
+                    background: "var(--gold)",
+                    color: "#000",
+                    boxShadow: "0 0 8px var(--gold-glow)"
+                }}
+                onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = "var(--gold-light)";
+                }}
+                onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = "var(--gold)";
+                }}
             >
-                {sidebarContent}
-            </motion.aside>
-        </>
+                {collapsed ? (
+                    <ChevronRight className="w-3.5 h-3.5" />
+                ) : (
+                    <ChevronLeft className="w-3.5 h-3.5" />
+                )}
+            </button>
+        </motion.aside>
     );
 }

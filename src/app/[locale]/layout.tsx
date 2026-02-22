@@ -9,8 +9,15 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { getProfile } from "@/lib/firebase-db";
+import type { Metadata } from "next";
 
 type Locale = (typeof routing.locales)[number];
+
+// Force manifest to root path so /fr/manifest.webmanifest doesn't 404
+export const metadata: Metadata = {
+    manifest: "/manifest.webmanifest",
+};
+
 
 export default async function LocaleLayout({
     children,
@@ -29,13 +36,13 @@ export default async function LocaleLayout({
     const profile = await getProfile();
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zaerthnh.dev";
 
-    const siteName = locale === "fr" 
-        ? "Marie Danielle Akpeuby - Portfolio"
-        : "Marie Danielle Akpeuby - Portfolio";
-    
+    const siteName = locale === "fr"
+        ? "Akou N'dy Phyllis Melvin - Portfolio"
+        : "Akou N'dy Phyllis Melvin - Portfolio";
+
     const siteDescription = locale === "fr"
-        ? "Portfolio de Marie Danielle Akpeuby - Développeuse Fullstack & DevOps"
-        : "Marie Danielle Akpeuby's Portfolio - Fullstack Developer & DevOps";
+        ? "Portfolio de Akou N'dy Phyllis Melvin - Développeur Web JS/PHP Full-Stack Junior"
+        : "Akou N'dy Phyllis Melvin's Portfolio - Junior Full-Stack Web Developer";
 
     return (
         <>
@@ -45,18 +52,17 @@ export default async function LocaleLayout({
                 description={siteDescription}
             />
             <PersonSchema
-                name="Marie Danielle Akpeuby"
-                jobTitle="Développeuse Fullstack & DevOps"
-                description={profile?.about || "Développeuse Fullstack & DevOps spécialisée en React, Next.js, Node.js, Docker et Kubernetes."}
+                name="Akou N'dy Phyllis Melvin"
+                jobTitle="Développeur Web JS/PHP Full-Stack Junior"
+                description={profile?.about || "Développeur Web JS/PHP Full-Stack Junior spécialisé en React, Next.js, Node.js, PHP, Laravel et Firebase."}
                 image={profile?.image || `${baseUrl}/images/profile.svg`}
                 url={`${baseUrl}/${locale}`}
                 sameAs={[
-                    profile?.github || "https://github.com/zaerthnh",
-                    profile?.linkedin || "https://linkedin.com/in/zaerthnh",
-                    profile?.twitter || "https://twitter.com/zaerthnh",
+                    profile?.github || "https://github.com/melvin-phyllis",
+                    profile?.linkedin || "https://www.linkedin.com/in/melvin-akou/",
                 ]}
                 worksFor={{
-                    name: "Freelance",
+                    name: "Ya Consulting",
                 }}
             />
             <NextIntlClientProvider locale={locale} messages={messages}>

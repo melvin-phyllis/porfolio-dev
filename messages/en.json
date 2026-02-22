@@ -13,19 +13,23 @@
   },
   "hero": {
     "greeting": "Hello, I am",
-    "name": "Marie Danielle Akpeuby",
-    "title": "Fullstack Developer & DevOps",
-    "subtitle": "I create modern, high-performance web applications using the latest technologies",
+    "name": "Akou N'dy Phyllis Melvin",
+    "title": "Junior JS/PHP Full-Stack Web Developer",
+    "subtitle": "I turn ideas into real projects with React, Next.js and Firebase",
     "cta": {
-      "projects": "See my projects",
+      "projects": "View my CV",
       "contact": "Contact me"
     },
-    "roles": ["Fullstack Developer", "DevOps Expert", "AI Enthusiast"],
+    "roles": [
+      "Fullstack Developer",
+      "React & Next.js Enthusiast",
+      "Web App Creator"
+    ],
     "scroll": "Scroll"
   },
   "about": {
     "title": "About me",
-    "description": "Fullstack & DevOps developer passionate about creating innovative web applications. I combine technical expertise in React, Next.js, Node.js and extensive experience in DevOps with Docker, Kubernetes and CI/CD.",
+    "description": "Junior full-stack developer passionate about learning and turning ideas into real projects. Skilled in React, Next.js, Node.js and Firebase. Looking for my first professional experience to keep growing.",
     "downloadCv": "Download my CV",
     "stats": {
       "experience": "Years of experience",
@@ -42,9 +46,13 @@
     "categories": {
       "frontend": "Frontend",
       "backend": "Backend",
-      "devops": "DevOps & Infrastructure",
-      "ai": "AI & Automation",
-      "database": "Databases"
+      "devops": "Tools",
+      "automatisation": "Automation",
+      "data": "Data",
+      "database": "Databases",
+      "base de données": "Databases",
+      "outils": "Tools",
+      "ai": "AI & Automation"
     }
   },
   "experience": {
@@ -66,7 +74,7 @@
       "frontend": "Frontend",
       "backend": "Backend",
       "fullstack": "Fullstack",
-      "devops": "DevOps"
+      "devops": "Tools"
     }
   },
   "services": {
@@ -83,8 +91,8 @@
         "description": "Robust REST APIs with Node.js, Express, Django, FastAPI"
       },
       "devops": {
-        "title": "DevOps & Cloud",
-        "description": "CI/CD, Docker, Kubernetes, deployment and monitoring"
+        "title": "Tools & Containerization",
+        "description": "Docker, Git/GitHub, Postman, deployment"
       },
       "ai": {
         "title": "AI Integration",
@@ -99,13 +107,13 @@
       {
         "name": "Jean-Pierre Kouadio",
         "role": "CEO, TechStart Abidjan",
-        "content": "Marie Danielle transformed our vision into a high-performance web application. Her technical expertise and professionalism are remarkable.",
+        "content": "Melvin transformed our vision into a high-performance web application. His technical expertise and professionalism are remarkable.",
         "image": "/images/testimonials/client1.jpg"
       },
       {
         "name": "Fatou Diallo",
         "role": "CTO, InnovaCI",
-        "content": "Excellent collaboration on our microservices project. Her DevOps expertise has enabled us to significantly improve our deployment pipeline.",
+        "content": "Excellent collaboration on our fullstack project. His technical expertise has enabled us to significantly improve our application.",
         "image": "/images/testimonials/client2.jpg"
       },
       {
@@ -122,7 +130,7 @@
     "items": [
       {
         "question": "What types of projects do you work on?",
-        "answer": "I develop full-stack web applications, APIs, showcase websites, dashboards and complete DevOps solutions."
+        "answer": "I develop full-stack web applications, APIs, showcase websites and dashboards."
       },
       {
         "question": "What are your turnaround times?",

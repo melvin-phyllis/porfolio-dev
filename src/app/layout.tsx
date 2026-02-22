@@ -23,19 +23,18 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
     title: {
-        default: "Marie Danielle Akpeuby | Développeuse Fullstack & DevOps",
-        template: "%s | Marie Danielle Akpeuby",
+        default: "Akou N'dy Phyllis Melvin | Développeur Web JS/PHP Full-Stack Junior",
+        template: "%s | Akou N'dy Phyllis Melvin",
     },
     description:
-        "Portfolio de Marie Danielle Akpeuby - Développeuse Fullstack & DevOps spécialisée en React, Next.js, Node.js, Docker et Kubernetes. Création d'applications web modernes et performantes.",
+        "Portfolio de Akou N'dy Phyllis Melvin - Développeur Web JS/PHP Full-Stack Junior spécialisé en React, Next.js, Node.js, PHP, Laravel et Firebase. Création d'applications web modernes et performantes.",
     keywords: [
         "développeur fullstack",
-        "devops",
+        "docker",
         "react",
         "next.js",
         "node.js",
         "docker",
-        "kubernetes",
         "côte d'ivoire",
         "abidjan",
         "développement web",
@@ -45,9 +44,9 @@ export const metadata: Metadata = {
         "aws",
         "vercel",
     ],
-    authors: [{ name: "Marie Danielle Akpeuby", url: "https://github.com/zaerthnh" }],
-    creator: "Marie Danielle Akpeuby",
-    publisher: "Marie Danielle Akpeuby",
+    authors: [{ name: "Akou N'dy Phyllis Melvin", url: "https://github.com/melvin-phyllis" }],
+    creator: "Akou N'dy Phyllis Melvin",
+    publisher: "Akou N'dy Phyllis Melvin",
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://zaerthnh.dev"),
     alternates: {
         canonical: "/",
@@ -61,25 +60,25 @@ export const metadata: Metadata = {
         locale: "fr_FR",
         alternateLocale: ["en_US"],
         url: "/",
-        siteName: "Marie Danielle Akpeuby - Portfolio",
-        title: "Marie Danielle Akpeuby | Développeuse Fullstack & DevOps",
+        siteName: "Akou N'dy Phyllis Melvin - Portfolio",
+        title: "Akou N'dy Phyllis Melvin | Développeur Web JS/PHP Full-Stack Junior",
         description:
-            "Développeuse Fullstack & DevOps créant des applications web modernes et performantes avec React, Next.js et Node.js.",
+            "Développeur Web JS/PHP Full-Stack Junior créant des applications web modernes et performantes avec React, Next.js, Laravel et Firebase.",
         images: [
             {
                 url: "/og-image.png",
                 width: 1200,
                 height: 630,
-                alt: "Marie Danielle Akpeuby - Développeuse Fullstack & DevOps",
+                alt: "Akou N'dy Phyllis Melvin - Développeur Web JS/PHP Full-Stack Junior",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Marie Danielle Akpeuby | Développeuse Fullstack & DevOps",
+        title: "Akou N'dy Phyllis Melvin | Développeur Web JS/PHP Full-Stack Junior",
         description:
-            "Développeuse Fullstack & DevOps créant des applications web modernes et performantes.",
-        creator: "@zaerthnh",
+            "Développeur Web JS/PHP Full-Stack Junior créant des applications web modernes et performantes.",
+        creator: "@melvin_phyllis",
         images: ["/og-image.png"],
     },
     robots: {
@@ -97,6 +96,7 @@ export const metadata: Metadata = {
         google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
     },
     category: "technology",
+    manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({

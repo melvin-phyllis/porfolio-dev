@@ -72,8 +72,10 @@ export default function Contact({ profile }: ContactProps) {
     <section id="contact" className="section relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-0 w-96 h-96 rounded-full blur-3xl"
+          style={{ background: "radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%)" }} />
+        <div className="absolute bottom-1/4 right-0 w-80 h-80 rounded-full blur-3xl"
+          style={{ background: "radial-gradient(circle, rgba(251,191,36,0.08) 0%, transparent 70%)" }} />
       </div>
 
       <div className="max-w-7xl mx-auto">
@@ -91,7 +93,7 @@ export default function Contact({ profile }: ContactProps) {
             <p className="text-text-muted text-lg max-w-2xl mx-auto">
               {t("subtitle")}
             </p>
-            <div className="w-24 h-1 mx-auto mt-4 rounded-full bg-primary" />
+            <div className="w-24 h-1 mx-auto mt-4 rounded-full animated-gradient" />
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12">
@@ -117,10 +119,13 @@ export default function Contact({ profile }: ContactProps) {
                     viewport={{ once: false }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ x: 10 }}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-surface border border-border hover:border-primary/50 transition-all duration-300 group"
+                    className="flex items-center gap-4 p-4 rounded-xl bg-surface border transition-all duration-300 group"
+                    style={{ borderColor: "var(--border)" }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(245,158,11,0.4)"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--border)"; }}
                   >
-                    <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                      <info.icon className="w-6 h-6 text-primary" />
+                    <div className="p-3 rounded-lg transition-colors" style={{ background: "rgba(245,158,11,0.1)" }}>
+                      <info.icon className="w-6 h-6" style={{ color: "var(--gold)" }} />
                     </div>
                     <div>
                       <p className="text-sm text-text-muted">{info.label}</p>
@@ -163,7 +168,10 @@ export default function Contact({ profile }: ContactProps) {
                       value={formState.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-300 text-text"
+                      className="w-full px-4 py-3 rounded-xl bg-background border border-border outline-none transition-all duration-300 text-text"
+                      style={{}}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = "var(--gold)"; e.currentTarget.style.boxShadow = "0 0 0 2px var(--gold-dim)"; }}
+                      onBlur={(e) => { e.currentTarget.style.borderColor = ""; e.currentTarget.style.boxShadow = ""; }}
                       placeholder="John Doe"
                     />
                   </div>
@@ -180,7 +188,10 @@ export default function Contact({ profile }: ContactProps) {
                       value={formState.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-300 text-text"
+                      className="w-full px-4 py-3 rounded-xl bg-background border border-border outline-none transition-all duration-300 text-text"
+                      style={{}}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = "var(--gold)"; e.currentTarget.style.boxShadow = "0 0 0 2px var(--gold-dim)"; }}
+                      onBlur={(e) => { e.currentTarget.style.borderColor = ""; e.currentTarget.style.boxShadow = ""; }}
                       placeholder="john@example.com"
                     />
                   </div>
@@ -197,7 +208,10 @@ export default function Contact({ profile }: ContactProps) {
                       value={formState.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-300 text-text"
+                      className="w-full px-4 py-3 rounded-xl bg-background border border-border outline-none transition-all duration-300 text-text"
+                      style={{}}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = "var(--gold)"; e.currentTarget.style.boxShadow = "0 0 0 2px var(--gold-dim)"; }}
+                      onBlur={(e) => { e.currentTarget.style.borderColor = ""; e.currentTarget.style.boxShadow = ""; }}
                       placeholder={t("form.subjectPlaceholder")}
                     />
                   </div>
@@ -223,7 +237,16 @@ export default function Contact({ profile }: ContactProps) {
                   <motion.button
                     type="submit"
                     disabled={status === "loading"}
-                    className="w-full py-4 rounded-xl bg-primary text-background font-semibold flex items-center justify-center gap-2 hover:bg-primary-light transition-all duration-300 disabled:opacity-70"
+                    className="w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-70"
+                    style={{
+                      background: status === "success"
+                        ? "linear-gradient(135deg, #10b981 0%, #34d399 100%)"
+                        : status === "error"
+                          ? "linear-gradient(135deg, #ef4444 0%, #f87171 100%)"
+                          : "linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)",
+                      color: "#000",
+                      boxShadow: "0 4px 20px var(--gold-glow)"
+                    }}
                     whileHover={{ scale: status === "loading" ? 1 : 1.02 }}
                     whileTap={{ scale: status === "loading" ? 1 : 0.98 }}
                   >

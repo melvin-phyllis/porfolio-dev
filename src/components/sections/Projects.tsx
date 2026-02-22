@@ -72,10 +72,17 @@ export default function Projects({ projects = [] }: ProjectsProps) {
               <motion.button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`px-5 py-2 rounded-xl font-medium capitalize transition-all duration-300 ${activeFilter === filter
-                  ? "bg-primary text-background"
-                  : "bg-surface border border-border text-text-muted hover:border-primary hover:text-primary"
-                  }`}
+                className="px-5 py-2 rounded-xl font-medium capitalize transition-all duration-200"
+                style={activeFilter === filter ? {
+                  background: "linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)",
+                  color: "#000",
+                  fontWeight: 700,
+                  boxShadow: "0 2px 14px var(--gold-glow)"
+                } : {
+                  background: "var(--surface)",
+                  border: "1px solid var(--border)",
+                  color: "var(--text-muted)"
+                }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -98,7 +105,15 @@ export default function Projects({ projects = [] }: ProjectsProps) {
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
-                  className="group relative rounded-2xl overflow-hidden bg-surface border border-border hover:border-primary/50 transition-all duration-500"
+                  className="group relative rounded-2xl overflow-hidden bg-surface border border-border transition-all duration-500"
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(245,158,11,0.5)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 30px var(--gold-glow)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "";
+                  }}
                 >
                   {/* Project Image */}
                   <div className="relative h-48 overflow-hidden bg-background-light">
@@ -120,9 +135,18 @@ export default function Projects({ projects = [] }: ProjectsProps) {
 
                   {/* Project Info */}
                   <div className="p-6">
-                    <span className="inline-block px-3 py-1 mb-3 text-xs font-medium rounded-full bg-primary/10 text-primary capitalize">
-                      {project.category}
-                    </span>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="inline-block px-3 py-1 text-xs font-medium rounded-full capitalize"
+                        style={{ background: "rgba(245,158,11,0.1)", color: "var(--gold)" }}>
+                        {project.category}
+                      </span>
+                      {project.featured && (
+                        <span className="inline-block px-2 py-0.5 text-xs font-bold rounded-full"
+                          style={{ background: "linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)", color: "#000" }}>
+                          ⭐ Featured
+                        </span>
+                      )}
+                    </div>
                     <h3 className="text-xl font-bold text-text mb-2 group-hover:text-primary transition-colors">
                       {project.title}
                     </h3>

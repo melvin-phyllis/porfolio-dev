@@ -44,7 +44,7 @@ export default function About({ profile, stats }: AboutProps) {
   const t = useTranslations("about");
 
   const description = profile?.about || t("description");
-  const resumeUrl = profile?.resumeUrl || "/cv.pdf";
+  const resumeUrl = profile?.resumeUrl || "/cv-melvin-phyllis.pdf";
 
   return (
     <section id="about" className="section relative overflow-hidden">
@@ -75,6 +75,7 @@ export default function About({ profile, stats }: AboutProps) {
               <span className="gradient-text">{t("title")}</span>
             </h2>
             <div className="w-24 h-1 mx-auto rounded-full animated-gradient" />
+            <div className="mt-3 w-2 h-2 rounded-full mx-auto" style={{ background: "var(--gold)", boxShadow: "0 0 8px var(--gold-glow)" }} />
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -85,11 +86,20 @@ export default function About({ profile, stats }: AboutProps) {
               </p>
 
               <div className="flex flex-wrap gap-3">
-                {["React", "Next.js", "Node.js", "Docker", "Kubernetes", "Python"].map((tech) => (
+                {["React", "Next.js", "Node.js", "Docker", "Python"].map((tech) => (
                   <motion.span
                     key={tech}
                     whileHover={{ scale: 1.1, y: -2 }}
-                    className="px-4 py-2 rounded-full bg-surface border border-border text-sm font-medium hover:border-primary hover:text-primary transition-all duration-300"
+                    className="px-4 py-2 rounded-full bg-surface border border-border text-sm font-medium transition-all duration-300"
+                    style={{ cursor: "default" }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.borderColor = "var(--gold)";
+                      (e.currentTarget as HTMLElement).style.color = "var(--gold)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.borderColor = "";
+                      (e.currentTarget as HTMLElement).style.color = "";
+                    }}
                   >
                     {tech}
                   </motion.span>
@@ -99,7 +109,12 @@ export default function About({ profile, stats }: AboutProps) {
               <motion.a
                 href={resumeUrl}
                 download
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-background font-semibold hover:bg-primary-light transition-all duration-300"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300"
+                style={{
+                  background: "linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)",
+                  color: "#000",
+                  boxShadow: "0 4px 20px var(--gold-glow)"
+                }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -120,14 +135,23 @@ export default function About({ profile, stats }: AboutProps) {
                     key={stat.label}
                     variants={staggerItem}
                     whileHover={{ y: -8, scale: 1.02 }}
-                    className="p-6 rounded-2xl bg-surface border border-border hover:border-primary/50 transition-all duration-300 card-hover"
+                    className="p-6 rounded-2xl bg-surface border transition-all duration-300"
+                    style={{ borderColor: "#222222" }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(245,158,11,0.4)";
+                      (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px var(--gold-glow)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.borderColor = "#222222";
+                      (e.currentTarget as HTMLElement).style.boxShadow = "";
+                    }}
                   >
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 rounded-lg bg-primary/10">
-                        <Icon className="w-5 h-5 text-primary" />
+                      <div className="p-2 rounded-lg" style={{ background: "rgba(245,158,11,0.1)" }}>
+                        <Icon className="w-5 h-5" style={{ color: "var(--gold)" }} />
                       </div>
                     </div>
-                    <div className="text-4xl font-bold gradient-text mb-1">
+                    <div className="text-4xl font-bold mb-1" style={{ color: "var(--gold)" }}>
                       <AnimatedCounter value={stat.value} />
                     </div>
                     <p className="text-text-muted text-sm">

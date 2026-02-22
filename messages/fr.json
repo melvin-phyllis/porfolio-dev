@@ -13,19 +13,23 @@
   },
   "hero": {
     "greeting": "Bonjour, je suis",
-    "name": "Marie Danielle Akpeuby",
-    "title": "Développeuse Fullstack & DevOps",
-    "subtitle": "Je crée des applications web modernes et performantes avec les dernières technologies",
+    "name": "Akou N'dy Phyllis Melvin",
+    "title": "Développeur Web JS/PHP Full-Stack Junior",
+    "subtitle": "Je transforme des idées en projets concrets avec React, Next.js et Firebase",
     "cta": {
-      "projects": "Voir mes projets",
+      "projects": "Voir mon CV",
       "contact": "Me contacter"
     },
-    "roles": ["Développeuse Fullstack", "Experte DevOps", "Passionnée d'IA"],
+    "roles": [
+      "Développeur Fullstack",
+      "Passionné React & Next.js & Node.js & Laravel",
+      "Créateur d'Apps Web"
+    ],
     "scroll": "Défiler"
   },
   "about": {
     "title": "À propos de moi",
-    "description": "Développeuse Fullstack & DevOps passionnée par la création d'applications web innovantes. Je combine expertise technique en React, Next.js, Node.js et une forte expérience en DevOps avec Docker, Kubernetes et CI/CD.",
+    "description": "Développeur full-stack junior passionné, j'aime apprendre et transformer des idées en projets concrets. Maîtrise de React, Next.js, Node.js et Firebase. À la recherche d'une première expérience pour continuer à progresser.",
     "downloadCv": "Télécharger mon CV",
     "stats": {
       "experience": "Années d'expérience",
@@ -42,9 +46,13 @@
     "categories": {
       "frontend": "Frontend",
       "backend": "Backend",
-      "devops": "DevOps & Infrastructure",
-      "ai": "IA & Automatisation",
-      "database": "Bases de données"
+      "devops": "Outils",
+      "automatisation": "Automatisation",
+      "data": "Data",
+      "database": "Bases de données",
+      "base de données": "Bases de données",
+      "outils": "Outils",
+      "ai": "IA & Automatisation"
     }
   },
   "experience": {
@@ -66,7 +74,7 @@
       "frontend": "Frontend",
       "backend": "Backend",
       "fullstack": "Fullstack",
-      "devops": "DevOps"
+      "devops": "Outils"
     }
   },
   "services": {
@@ -80,15 +88,15 @@
       },
       "api": {
         "title": "API & Backend",
-        "description": "APIs REST robustes avec Node.js, Express, Django, FastAPI"
+        "description": "APIs REST avec Node.js, Express.js, Laravel et PHP"
       },
       "devops": {
-        "title": "DevOps & Cloud",
-        "description": "CI/CD, Docker, Kubernetes, déploiement et monitoring"
+        "title": "Outils & Conteneurisation",
+        "description": "Docker, Git/GitHub, Postman, déploiement"
       },
       "ai": {
-        "title": "Intégration IA",
-        "description": "Agents conversationnels, RAG, automatisation avec CrewAI"
+        "title": "Automatisation & Data",
+        "description": "N8N, Make, Power BI, Airflow"
       }
     }
   },
@@ -99,13 +107,13 @@
       {
         "name": "Jean-Pierre Kouadio",
         "role": "CEO, TechStart Abidjan",
-        "content": "Marie Danielle a transformé notre vision en une application web performante. Sa maîtrise technique et son professionnalisme sont remarquables.",
+        "content": "Melvin a transformé notre vision en une application web performante. Sa maîtrise technique et son professionnalisme sont remarquables.",
         "image": "/images/testimonials/client1.jpg"
       },
       {
         "name": "Fatou Diallo",
         "role": "CTO, InnovaCI",
-        "content": "Excellente collaboration sur notre projet de microservices. Son expertise DevOps nous a permis d'améliorer considérablement notre pipeline de déploiement.",
+        "content": "Excellente collaboration sur notre projet fullstack. Son expertise technique nous a permis d'améliorer considérablement notre application.",
         "image": "/images/testimonials/client2.jpg"
       },
       {
@@ -122,7 +130,7 @@
     "items": [
       {
         "question": "Quels types de projets réalisez-vous ?",
-        "answer": "Je réalise des applications web fullstack, des APIs, des sites vitrines, des dashboards et des solutions DevOps complètes."
+        "answer": "Je réalise des applications web fullstack, des APIs, des sites vitrines et des dashboards."
       },
       {
         "question": "Quels sont vos délais de réalisation ?",
@@ -141,7 +149,7 @@
   "contact": {
     "title": "Contactez-moi",
     "subtitle": "Discutons de votre projet",
-    "description": "N'hésitez pas à me contacter pour discuter de vos projets, poser des questions ou simplement dire bonjour. Je suis toujours ouverte à de nouvelles opportunités et collaborations.",
+    "description": "N'hésitez pas à me contacter pour discuter de vos projets, poser des questions ou simplement dire bonjour. Je suis toujours ouvert à de nouvelles opportunités et collaborations.",
     "social": "Retrouvez-moi sur les réseaux sociaux",
     "form": {
       "name": "Votre nom",

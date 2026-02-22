@@ -10,8 +10,6 @@ import Link from "next/link";
 const socialLinks = [
   { name: "GitHub", icon: Github, url: personalInfo.github },
   { name: "LinkedIn", icon: Linkedin, url: personalInfo.linkedin },
-  { name: "Twitter", icon: Twitter, url: personalInfo.twitter },
-  { name: "Email", icon: Mail, url: `mailto:${personalInfo.email}` },
 ];
 
 export default function Footer() {

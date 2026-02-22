@@ -65,7 +65,6 @@ async function main() {
         { name: "Laravel", level: 70, category: "backend", icon: "SiLaravel", color: "#FF2D20" },
         // DevOps
         { name: "Docker", level: 85, category: "devops", icon: "SiDocker", color: "#2496ED" },
-        { name: "Kubernetes", level: 75, category: "devops", icon: "SiKubernetes", color: "#326CE5" },
         { name: "GitHub Actions", level: 80, category: "devops", icon: "SiGithubactions", color: "#2088FF" },
         { name: "Terraform", level: 70, category: "devops", icon: "SiTerraform", color: "#7B42BC" },
         { name: "Ansible", level: 65, category: "devops", icon: "SiAnsible", color: "#EE0000" },

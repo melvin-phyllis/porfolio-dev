@@ -7,7 +7,7 @@ import {
   SiHtml5, SiCss3, SiJavascript, SiTypescript, SiReact, SiRedux,
   SiTailwindcss, SiGreensock, SiFramer, SiSass, SiStyledcomponents,
   SiNextdotjs, SiNodedotjs, SiExpress, SiDjango, SiFastapi, SiLaravel,
-  SiDocker, SiKubernetes, SiGithubactions, SiTerraform, SiAnsible,
+  SiDocker, SiGithubactions, SiTerraform, SiAnsible,
   SiPostgresql, SiMysql, SiMongodb, SiRedis, SiPython
 } from "react-icons/si";
 import { Code2 } from "lucide-react";
@@ -20,7 +20,6 @@ const iconMapping: Record<string, any> = {
   "SiSass": SiSass, "SiStyledcomponents": SiStyledcomponents, "SiNextdotjs": SiNextdotjs,
   "SiNodedotjs": SiNodedotjs, "SiExpress": SiExpress, "SiDjango": SiDjango,
   "SiFastapi": SiFastapi, "SiLaravel": SiLaravel, "SiDocker": SiDocker,
-  "SiKubernetes": SiKubernetes, "SiGithubactions": SiGithubactions, "SiTerraform": SiTerraform,
   "SiAnsible": SiAnsible, "SiPostgresql": SiPostgresql, "SiMysql": SiMysql,
   "SiMongodb": SiMongodb, "SiRedis": SiRedis, "SiPython": SiPython,
   "default": Code2
@@ -45,9 +44,13 @@ function SkillLevelBar({ level }: { level: number }) {
       {[...Array(5)].map((_, i) => (
         <div
           key={i}
-          className={`h-1 w-6 rounded-full transition-colors ${
-            i < level ? "bg-primary" : "bg-surface-light"
-          }`}
+          className="h-1 w-6 rounded-full transition-all duration-300"
+          style={{
+            background: i < level
+              ? `linear-gradient(90deg, var(--gold-dark) 0%, var(--gold-light) 100%)`
+              : `var(--surface-light, #1a1a1a)`,
+            boxShadow: i < level ? "0 0 4px var(--gold-glow)" : "none"
+          }}
         />
       ))}
     </div>
@@ -92,7 +95,7 @@ export default function Skills({ skills = [] }: SkillsProps) {
             <p className="text-text-muted text-lg max-w-2xl mx-auto">
               {t("subtitle")}
             </p>
-            <div className="w-24 h-1 mx-auto mt-4 rounded-full bg-primary" />
+            <div className="w-24 h-1 mx-auto mt-4 rounded-full animated-gradient" />
           </motion.div>
 
           {/* Category Filter */}
@@ -101,11 +104,17 @@ export default function Skills({ skills = [] }: SkillsProps) {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  activeCategory === category
-                    ? "bg-primary text-background"
-                    : "bg-surface border border-border text-text-muted hover:border-primary"
-                }`}
+                className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200"
+                style={activeCategory === category ? {
+                  background: "linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)",
+                  color: "#000",
+                  fontWeight: 700,
+                  boxShadow: "0 2px 12px var(--gold-glow)"
+                } : {
+                  background: "var(--surface)",
+                  border: "1px solid var(--border)",
+                  color: "var(--text-muted)"
+                }}
               >
                 {category === "all"
                   ? t("all")
@@ -140,7 +149,9 @@ export default function Skills({ skills = [] }: SkillsProps) {
                           key={tech.id}
                           variants={staggerItem}
                           whileHover={{ scale: 1.05, y: -4 }}
-                          className="p-4 rounded-xl bg-surface border border-border hover:border-primary/50 transition-all duration-300 group"
+                          className="p-4 rounded-xl bg-surface border border-border transition-all duration-300 group"
+                          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(245,158,11,0.5)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 20px var(--gold-glow)"; }}
+                          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = ""; (e.currentTarget as HTMLElement).style.boxShadow = ""; }}
                         >
                           <div className="flex flex-col items-center text-center">
                             <div

@@ -215,7 +215,7 @@ export function ArticleForm({ initialData }: ArticleFormProps) {
                                 <FormItem>
                                     <FormLabel className="text-gray-700 dark:text-gray-300">Auteur</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Marie Danielle" {...field} />
+                                        <Input placeholder="Phyllis Melvin" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -306,8 +306,8 @@ export function ArticleForm({ initialData }: ArticleFormProps) {
 
                     {/* Actions */}
                     <div className="flex items-center gap-3 pt-4 border-t border-gray-200 dark:border-gray-800">
-                        <Button 
-                            type="submit" 
+                        <Button
+                            type="submit"
                             variant="success"
                             disabled={isLoading || isSavingDraft}
                         >
@@ -318,8 +318,8 @@ export function ArticleForm({ initialData }: ArticleFormProps) {
                             )}
                             {initialData ? "Mettre à jour" : "Publier"}
                         </Button>
-                        <Button 
-                            type="button" 
+                        <Button
+                            type="button"
                             variant="secondary"
                             disabled={isLoading || isSavingDraft}
                             onClick={saveDraft}

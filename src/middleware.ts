@@ -25,6 +25,8 @@ export default auth((req) => {
 });
 
 export const config = {
-    // Skip all paths that should not be internationalized (api, _next, static assets)
-    matcher: ["/((?!api|_next/static|_next/image|favicon.ico|images|.*\\.png$).*)"],
+    // Skip all paths that should not be internationalized
+    matcher: [
+        "/((?!api|_next/static|_next/image|favicon.ico|images|manifest.webmanifest|\\.well-known|.*\\.png$|.*\\.ico$|.*\\.svg$|.*\\.webmanifest$|.*\\.pdf$).*)"
+    ],
 };

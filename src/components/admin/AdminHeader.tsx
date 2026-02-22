@@ -58,18 +58,22 @@ export function AdminHeader({ title, subtitle, children, sidebarCollapsed = fals
         setTheme(isDark ? "light" : "dark");
     };
 
+    const headerStyle = {
+        background: "rgba(10,10,10,0.95)",
+        borderBottom: "1px solid rgba(245,158,11,0.12)",
+        backdropFilter: "blur(12px)",
+    };
+
     return (
         <motion.header
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2 }}
             className={cn(
-                "fixed top-0 right-0 z-30 backdrop-blur-md border-b transition-all duration-200",
-                "bg-white/95 dark:bg-gray-900/95 border-gray-200 dark:border-gray-800",
-                // Desktop: ajuster selon sidebar
-                "left-0 lg:left-[260px]",
-                sidebarCollapsed && "lg:left-[72px]"
+                "fixed top-0 right-0 z-30 transition-all duration-200",
+                sidebarCollapsed ? "lg:left-[72px]" : "lg:left-[260px]"
             )}
+            style={headerStyle}
         >
             <div className="flex h-16 items-center justify-between px-4 md:px-6">
                 {/* Left: Menu button (mobile) + Breadcrumb & Title */}
@@ -77,7 +81,7 @@ export function AdminHeader({ title, subtitle, children, sidebarCollapsed = fals
                     {/* Bouton Menu Mobile */}
                     <button
                         onClick={onMobileMenuToggle}
-                        className="lg:hidden p-2 -ml-2 rounded-lg text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                        className="lg:hidden p-2 -ml-2 rounded-lg text-amber-300 hover:text-amber-500 hover:bg-gray-800 transition-colors"
                     >
                         <Menu className="h-6 w-6" />
                     </button>
@@ -88,7 +92,7 @@ export function AdminHeader({ title, subtitle, children, sidebarCollapsed = fals
                             {breadcrumbs.slice(1).map((crumb, index) => (
                                 <div key={crumb.href} className="flex items-center gap-1">
                                     {index > 0 && (
-                                        <ChevronRight className="h-3 w-3 text-gray-400 dark:text-gray-600" />
+                                        <ChevronRight className="h-3 w-3 text-amber-400" />
                                     )}
                                     {crumb.isLast ? (
                                         <span className="text-gray-700 dark:text-gray-300">{crumb.name}</span>

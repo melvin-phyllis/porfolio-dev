@@ -14,15 +14,15 @@ export default function DashboardLayout({
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
-            <Sidebar 
-                collapsed={sidebarCollapsed} 
+        <div className="min-h-screen transition-colors" style={{ background: "#050505" }}>
+            <Sidebar
+                collapsed={sidebarCollapsed}
                 onCollapse={setSidebarCollapsed}
                 mobileOpen={mobileMenuOpen}
                 onMobileClose={() => setMobileMenuOpen(false)}
             />
 
-            <AdminHeader 
+            <AdminHeader
                 sidebarCollapsed={sidebarCollapsed}
                 onMobileMenuToggle={() => setMobileMenuOpen(!mobileMenuOpen)}
             />
