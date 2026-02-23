@@ -164,6 +164,81 @@ export default function RootLayout({
                 <link rel="dns-prefetch" href="https://ik.imagekit.io" />
             </head>
             <body className="font-sans antialiased">
+                {/* Spinner de chargement — affiché instantanément, disparaît quand React hydrate */}
+                <div
+                    id="preloader"
+                    style={{
+                        position: "fixed",
+                        inset: 0,
+                        zIndex: 9999,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        background: "#0a0a0a",
+                        transition: "opacity 0.4s ease, visibility 0.4s ease",
+                    }}
+                >
+                    <span
+                        style={{
+                            position: "relative",
+                            width: 48,
+                            height: 48,
+                            display: "inline-block",
+                        }}
+                    />
+                </div>
+                <style
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            #preloader span,
+                            #preloader span::before,
+                            #preloader span::after {
+                                position: absolute;
+                                left: 0;
+                                top: 0;
+                                width: 48px;
+                                height: 48px;
+                                box-sizing: border-box;
+                            }
+                            #preloader span::before,
+                            #preloader span::after {
+                                content: "";
+                                display: block;
+                                border: 32px solid transparent;
+                                border-top-color: #fff;
+                                animation: weld-rotate 2s infinite ease-in;
+                            }
+                            #preloader span::before {
+                                border-color: transparent transparent transparent #f59e0b;
+                                animation-delay: 0.5s;
+                            }
+                            @keyframes weld-rotate {
+                                0%, 25% { transform: rotate(0deg); }
+                                50%, 75% { transform: rotate(180deg); }
+                                100% { transform: rotate(360deg); }
+                            }
+                            /* Cacher le preloader une fois le contenu chargé */
+                            body.loaded #preloader {
+                                opacity: 0;
+                                visibility: hidden;
+                                pointer-events: none;
+                            }
+                        `,
+                    }}
+                />
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.addEventListener("load", function() {
+                                document.body.classList.add("loaded");
+                                setTimeout(function() {
+                                    var el = document.getElementById("preloader");
+                                    if (el) el.remove();
+                                }, 500);
+                            });
+                        `,
+                    }}
+                />
                 <ThemeProvider>
                     {children}
                 </ThemeProvider>
