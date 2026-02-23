@@ -23,11 +23,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
     title: {
-        default: "Melvin Akou | Développeur Web JS/PHP Full-Stack Junior — Portfolio",
-        template: "%s | Melvin Akou — Développeur Web Full-Stack",
+        default: "Melvin Akou | Développeur Web Full-Stack JS/PHP",
+        template: "%s | Melvin Akou",
     },
     description:
-        "Portfolio de Melvin Akou (Akou N'dy Phyllis Melvin / Melvyn), développeur web JavaScript & PHP full-stack junior basé en Côte d'Ivoire. Spécialisé en React, Next.js, Node.js, TypeScript, PHP, Laravel, Firebase, Tailwind CSS. Création d'applications web modernes, performantes et responsive.",
+        "Portfolio de Melvin Akou, développeur web JavaScript & PHP full-stack à Abidjan. React, Next.js, Laravel, Firebase. Applications web modernes et performantes.",
     keywords: [
         // Nom et variantes
         "Melvin Akou",
@@ -100,7 +100,7 @@ export const metadata: Metadata = {
     authors: [{ name: "Melvin Akou", url: "https://github.com/melvin-phyllis" }],
     creator: "Melvin Akou",
     publisher: "Melvin Akou",
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://zaerthnh.dev"),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://melvin-dev.com"),
     alternates: {
         canonical: "/",
         languages: {
@@ -113,10 +113,10 @@ export const metadata: Metadata = {
         locale: "fr_FR",
         alternateLocale: ["en_US"],
         url: "/",
-        siteName: "Melvin Akou — Développeur Web Full-Stack",
-        title: "Melvin Akou | Développeur Web JS/PHP Full-Stack Junior — Portfolio",
+        siteName: "Melvin Akou — Portfolio",
+        title: "Melvin Akou | Développeur Web Full-Stack JS/PHP",
         description:
-            "Développeur web JavaScript & PHP full-stack junior en Côte d'Ivoire. Expertise React, Next.js, Laravel, Firebase. Projets modernes, performants et responsive.",
+            "Développeur web JS/PHP full-stack à Abidjan. React, Next.js, Laravel, Firebase. Projets modernes et responsive.",
         images: [
             {
                 url: "/og-image.png",
@@ -128,9 +128,9 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Melvin Akou | Développeur Web JS/PHP Full-Stack",
+        title: "Melvin Akou | Développeur Web Full-Stack JS/PHP",
         description:
-            "Développeur web JS/PHP full-stack junior en Côte d'Ivoire. React, Next.js, Laravel, Firebase. Portfolio & projets.",
+            "Développeur web JS/PHP full-stack à Abidjan. React, Next.js, Laravel, Firebase.",
         creator: "@melvin_phyllis",
         images: ["/og-image.png"],
     },

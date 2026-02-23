@@ -20,15 +20,15 @@ export async function generateMetadata({
     params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
     const { locale } = await params;
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zaerthnh.dev";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://melvin-dev.com";
 
     return {
         title: locale === "fr"
-            ? "Melvin Akou | Développeur Web JS/PHP Full-Stack Junior — Portfolio"
-            : "Melvin Akou | Junior Full-Stack JS/PHP Web Developer — Portfolio",
+            ? "Melvin Akou | Développeur Web Full-Stack JS/PHP"
+            : "Melvin Akou | Full-Stack JS/PHP Web Developer",
         description: locale === "fr"
-            ? "Portfolio de Melvin Akou (Melvyn), développeur web JavaScript & PHP full-stack junior basé à Abidjan, Côte d'Ivoire. Projets React, Next.js, Node.js, Laravel, Firebase. Création d'applications web modernes et performantes."
-            : "Melvin Akou's (Melvyn) portfolio — Junior full-stack JS/PHP web developer based in Abidjan, Côte d'Ivoire. React, Next.js, Node.js, Laravel, Firebase projects. Building modern, high-performance web applications.",
+            ? "Portfolio de Melvin Akou, développeur web JS/PHP full-stack à Abidjan. Projets React, Next.js, Laravel, Firebase."
+            : "Melvin Akou's portfolio — Full-stack JS/PHP web developer in Abidjan. React, Next.js, Laravel, Firebase projects.",
         alternates: {
             canonical: `${baseUrl}/${locale}`,
             languages: {
@@ -40,11 +40,11 @@ export async function generateMetadata({
             url: `${baseUrl}/${locale}`,
             locale: locale === "fr" ? "fr_FR" : "en_US",
             title: locale === "fr"
-                ? "Melvin Akou — Développeur Web Full-Stack | React, Next.js, Laravel"
-                : "Melvin Akou — Full-Stack Web Developer | React, Next.js, Laravel",
+                ? "Melvin Akou — Développeur Web Full-Stack"
+                : "Melvin Akou — Full-Stack Web Developer",
             description: locale === "fr"
-                ? "Découvrez les projets et compétences de Melvin Akou, développeur web JS/PHP full-stack junior spécialisé en React, Next.js, Laravel et Firebase."
-                : "Explore the projects and skills of Melvin Akou, a junior full-stack JS/PHP web developer specializing in React, Next.js, Laravel, and Firebase.",
+                ? "Projets et compétences de Melvin Akou, développeur web JS/PHP. React, Next.js, Laravel, Firebase."
+                : "Projects and skills of Melvin Akou, JS/PHP web developer. React, Next.js, Laravel, Firebase.",
         },
     };
 }
@@ -55,7 +55,7 @@ export default async function Home({
     params: Promise<{ locale: string }>;
 }) {
     const { locale } = await params;
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zaerthnh.dev";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://melvin-dev.com";
 
     // Récupérer les données de Firebase
     const [rawProfile, skills, allProjects, allExperiences] = await Promise.all([

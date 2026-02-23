@@ -34,7 +34,7 @@ export default async function LocaleLayout({
 
     const messages = await getMessages();
     const profile = await getProfile();
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zaerthnh.dev";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://melvin-dev.com";
 
     const siteName = locale === "fr"
         ? "Melvin Akou — Développeur Web Full-Stack"

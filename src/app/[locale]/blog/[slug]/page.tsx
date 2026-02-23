@@ -32,7 +32,7 @@ export async function generateMetadata({
         };
     }
 
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zaerthnh.dev";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://melvin-dev.com";
     let tags: string[] = [];
     try {
         tags = JSON.parse(article.tags);
@@ -55,11 +55,11 @@ export async function generateMetadata({
             tags: tags,
             images: article.image
                 ? [
-                      {
-                          url: article.image,
-                          alt: article.title,
-                      },
-                  ]
+                    {
+                        url: article.image,
+                        alt: article.title,
+                    },
+                ]
                 : undefined,
         },
         twitter: {
@@ -122,7 +122,7 @@ function parseMarkdown(content: string): string {
 export default async function ArticlePage({ params }: ArticlePageProps) {
     const { locale, slug } = await params;
     const t = await getTranslations("blog");
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://zaerthnh.dev";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://melvin-dev.com";
 
     const article = await getArticleBySlug(slug);
 
